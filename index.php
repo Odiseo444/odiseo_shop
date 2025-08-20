@@ -1,13 +1,18 @@
+<?php
+$correo = $_GET['correo'] ?? '';
+$clave = $_GET['clave'] ?? '';
+?>
 <!DOCTYPE html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Odiseo Shop | Moda Masculina</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-</head>
-<body>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Odiseo Shop | Moda Masculina</title>
+    <link href="css/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <script src="css/js/bootstrap.bundle.min.js"></script>
+  </head>
+  <body>
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
@@ -19,7 +24,7 @@
     <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Tienda</a></li>
+        <li class="nav-item"><a class="nav-link" href="shop.php">Tienda</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
         <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
         <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a></li>
@@ -67,31 +72,6 @@
           </div>
         </div>
       </div>
-
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://source.unsplash.com/400x400/?shirt,man" class="card-img-top" alt="Camisa">
-          <div class="card-body">
-            <h5 class="card-title">Camisa Casual</h5>
-            <p class="card-text">$00 .00</p>
-            <a href="#" class="btn btn-dark">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://source.unsplash.com/400x400/?mens,pants" class="card-img-top" alt="Pantalón">
-          <div class="card-body">
-            <h5 class="card-title">Pantalón Slim Fit</h5>
-            <p class="card-text">$00.00</p>
-            <a href="#" class="btn btn-dark">Comprar</a>
-          </div>
-        </div>
-      </div>
-
-    </div>
-  </div>
 </section>
 
 <!-- CTA -->
@@ -121,7 +101,20 @@
     </div>
   </div>
 </footer>
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
+<script>
+    document.addEventListener( 'DOMContentLoaded', () => {
+
+    if (!(<?php echo $clave  ?> === '' || <?php echo $correo ?> === '')) {
+        localStorage.setItem('user', JSON.stringify({
+            correo: <?php echo $correo; ?>,
+            clave: <?php echo $clave; ?>
+        }));
+    } else {
+        localStorage.removeItem('user');
+    }
+}
+    ) 
+</script>
 </html>
+

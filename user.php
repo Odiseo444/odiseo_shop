@@ -40,18 +40,18 @@
       <!-- Formulario de Login -->
       <div id="loginForm">
         <h2 class="text-center mb-4">Iniciar Sesión</h2>
-        <form action="login.php" id="loginFormData">
+        <form action="login.php" id="loginFormData" method="POST">
           <div class="mb-3">
             <label for="loginEmail" class="form-label">Correo electrónico</label>
-            <input type="email" class="form-control" id="loginEmail" required>
+            <input type="email" class="form-control" name='correo' id="loginEmail" required>
           </div>
           <div class="mb-3">
             <label for="loginPassword" class="form-label">Contraseña</label>
-            <input type="password" class="form-control" id="loginPassword" required>
+            <input type="password" class="form-control" name='clave' id="loginPassword" required>
           </div>
           <div class="mb-3 form-check">
             <input type="checkbox" class="form-check-input" id="rememberMe">
-            <label class="form-check-label" for="rememberMe">Recordarme</label>
+            <label class="form-check-label" value='on' name='recordar' for="rememberMe">Recordarme</label>
           </div>
           <button type="submit" class="btn btn-primary w-100">Ingresar</button>
           <div class="text-center mt-3">
@@ -128,9 +128,6 @@
 
       // Mostrar formulario de login por defecto
       showLoginBtn.click();
-
-      const hoy = new Date();
-      const date = hoy.toISOString();
     });
   </script>
 </body>
