@@ -49,10 +49,6 @@
             <label for="loginPassword" class="form-label">Contraseña</label>
             <input type="password" class="form-control" name='clave' id="loginPassword" required>
           </div>
-          <div class="mb-3 form-check">
-            <input type="checkbox" class="form-check-input" id="rememberMe">
-            <label class="form-check-label" value='on' name='recordar' for="rememberMe">Recordarme</label>
-          </div>
           <button type="submit" class="btn btn-primary w-100">Ingresar</button>
           <div class="text-center mt-3">
             <a href="#" id="forgotPassword">¿Olvidaste tu contraseña?</a>

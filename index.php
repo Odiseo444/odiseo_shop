@@ -1,6 +1,10 @@
 <?php
 $correo = $_GET['correo'] ?? '';
 $clave = $_GET['clave'] ?? '';
+include_once 'inc\database.php';
+$sql = 'SELECT * FROM productos';
+$hacerConsulta = mysqli_query($conexion, $sql);
+$products = mysqli_fetch_array($hacerConsulta);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -62,16 +66,20 @@ $clave = $_GET['clave'] ?? '';
     <h3 class="mb-4">Productos Destacados</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
       
-      <div class="col">
-        <div class="card h-100">
-          <img src="https://source.unsplash.com/400x400/?men,jacket" class="card-img-top" alt="Chaqueta">
-          <div class="card-body">
-            <h5 class="card-title">Chaqueta de Cuero</h5>
-            <p class="card-text">$120.00</p>
-            <a href="#" class="btn btn-dark">Comprar</a>
-          </div>
+      <?php 
+      while ($products) {
+        ?>
+        <div class="card" style="width: 18rem;">
+        <img src="..." class="card-img-top" alt="...">
+        <div class="card-body">
+          <h5 class="card-title">Card title</h5>
+          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
+          <a href="#" class="btn btn-primary">Go somewhere</a>
         </div>
       </div>
+      <?php
+      }
+      ?>
 </section>
 
 <!-- CTA -->
@@ -109,11 +117,9 @@ $clave = $_GET['clave'] ?? '';
         localStorage.setItem('user', JSON.stringify({
             correo: <?php echo $correo; ?>,
             clave: <?php echo $clave; ?>
-        }));
-    } else {
-        localStorage.removeItem('user');
-    }
+        }))
 }
+    }
     ) 
 </script>
 </html>
