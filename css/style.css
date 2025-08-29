@@ -1,0 +1,265 @@
+.material-symbols-outlined {
+  font-variation-settings:
+  'FILL' 0,
+  'wght' 400,
+  'GRAD' 0,
+  'opsz' 24;
+  color: white;
+}
+
+/* estilos.css */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f6f9;
+    margin: 0;
+    padding: 0;
+}
+
+.contenedor {
+    max-width: 600px;
+    margin: 50px auto;
+    padding: 30px;
+    background-color: #ffffff;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    border-radius: 10px;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 30px;
+}
+
+.form-grupo {
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 600;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="date"],
+select,
+textarea,
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+    border-color: #4a90e2;
+    outline: none;
+}
+
+textarea {
+    resize: vertical;
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn:hover {
+    background-color: #357abd;
+}
+
+/* card.css */
+.producto-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: nowrap;
+    gap: 20px;
+    width: auto;
+    height: auto;
+}
+
+.producto-card {
+    width: 300px;
+    background-color: #fff;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.producto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 20px rgba(0,0,0,0.2);
+}
+
+.producto-imagen {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.producto-detalles {
+    padding: 20px;
+}
+
+.producto-nombre {
+    font-size: 20px;
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.producto-descripcion {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 10px;
+}
+
+.producto-marca {
+    font-size: 14px;
+    color: #555;
+    margin-bottom: 10px;
+}
+
+.producto-precio {
+    font-size: 18px;
+    font-weight: bold;
+    color: #e67e22;
+    margin-bottom: 15px;
+}
+
+.btn-agregar {
+    width: 100%;
+    padding: 10px;
+    background-color: #4a90e2;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-agregar:hover {
+    background-color: #357abd;
+}
+
+/* perfil.css */
+body {
+    margin: 0;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f5f6fa;
+}
+
+.perfil-contenedor {
+    display: flex;
+    justify-content: center;
+    padding: 50px 20px;
+}
+
+.perfil-card {
+    background-color: #fff;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    max-width: 500px;
+    width: 100%;
+    padding: 30px;
+}
+
+.perfil-header {
+    text-align: center;
+    border-bottom: 1px solid #eaeaea;
+    padding-bottom: 20px;
+}
+
+.avatar {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+.nombre-usuario {
+    margin: 0;
+    font-size: 24px;
+    color: #333;
+}
+
+.correo-usuario {
+    color: #888;
+    font-size: 14px;
+}
+
+.perfil-info {
+    margin-top: 20px;
+}
+
+.perfil-info h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #4a90e2;
+}
+
+.perfil-info ul {
+    list-style: none;
+    padding: 0;
+}
+
+.perfil-info li {
+    padding: 8px 0;
+    border-bottom: 1px solid #f0f0f0;
+    font-size: 15px;
+}
+
+.perfil-acciones {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.btn-editar,
+.btn-cerrar {
+    flex: 1;
+    padding: 10px;
+    font-size: 15px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-editar {
+    background-color: #4a90e2;
+    color: #fff;
+}
+
+.btn-editar:hover {
+    background-color: #357abd;
+}
+
+.btn-cerrar {
+    background-color: #e74c3c;
+    color: #fff;
+}
+
+.btn-cerrar:hover {
+    background-color: #c0392b;
+}

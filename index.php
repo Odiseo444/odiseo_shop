@@ -4,7 +4,6 @@ $clave = $_GET['clave'] ?? '';
 include_once 'inc\database.php';
 $sql = 'SELECT * FROM productos';
 $hacerConsulta = mysqli_query($conexion, $sql);
-$products = mysqli_fetch_array($hacerConsulta);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -14,6 +13,8 @@ $products = mysqli_fetch_array($hacerConsulta);
     <title>Odiseo Shop | Moda Masculina</title>
     <link href="css/css/bootstrap.min.css" rel="stylesheet">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="css\style.css">
     <script src="css/js/bootstrap.bundle.min.js"></script>
   </head>
   <body>
@@ -21,6 +22,7 @@ $products = mysqli_fetch_array($hacerConsulta);
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
   <div class="container">
+    <span class="material-symbols-outlined">account_circle</span>
     <a class="navbar-brand" href="#">Odiseo Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -66,20 +68,26 @@ $products = mysqli_fetch_array($hacerConsulta);
     <h3 class="mb-4">Productos Destacados</h3>
     <div class="row row-cols-1 row-cols-md-3 g-4">
       
+      <div class="producto-container">
       <?php 
-      while ($products) {
+      while ($products = mysqli_fetch_array($hacerConsulta)) {
         ?>
-        <div class="card" style="width: 18rem;">
-        <img src="..." class="card-img-top" alt="...">
-        <div class="card-body">
-          <h5 class="card-title">Card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card’s content.</p>
-          <a href="#" class="btn btn-primary">Go somewhere</a>
-        </div>
-      </div>
-      <?php
+        <div class="producto-card">
+        <img src="https://via.placeholder.com/300x200" alt="Nombre del Producto" class="producto-imagen">
+        <div class="producto-detalles">
+            <h2 class="producto-nombre"><?php echo $products['nombre'] ?></h2>
+            <p class="producto-descripcion"><?php echo $products['descripcion'] ?></p>
+            <p class="producto-marca">Marca: <strong><?php echo $products['marca'] ?></strong></p>
+            <p class="producto-precio"><?php echo $products['precio'] ?></p>
+            <button class="btn-agregar">Agregar al carrito</button>
+          </div>
+          </div>
+          <?php
       }
       ?>
+      </div>
+      </div>
+      </div>
 </section>
 
 <!-- CTA -->

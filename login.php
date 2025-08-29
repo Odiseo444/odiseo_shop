@@ -1,4 +1,3 @@
-
 <?php
     $correo = $_POST['correo'];
     $clave = $_POST['clave'];
