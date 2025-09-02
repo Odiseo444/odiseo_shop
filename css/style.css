@@ -5,6 +5,7 @@
   'GRAD' 0,
   'opsz' 24;
   color: white;
+  margin-left: 25px;
 }
 
 /* estilos.css */
@@ -161,12 +162,51 @@ textarea {
 }
 
 /* perfil.css */
-body {
+/* Reset básico */
+* {
     margin: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: #f5f6fa;
+    padding: 0;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(to right, #eef2f3, #dfe9f3);
+    color: #333;
+}
+
+/* Header */
+.header {
+    background-color: #fff;
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.header h1 {
+    font-size: 20px;
+    color: #4a90e2;
+}
+
+/* Botón volver */
+.btn-volver {
+    background: none;
+    border: none;
+    font-size: 16px;
+    cursor: pointer;
+    color: #4a90e2;
+    font-weight: 600;
+    transition: color 0.3s;
+}
+
+.btn-volver:hover {
+    color: #357abd;
+}
+
+/* Contenedor perfil */
 .perfil-contenedor {
     display: flex;
     justify-content: center;
@@ -175,11 +215,16 @@ body {
 
 .perfil-card {
     background-color: #fff;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    border-radius: 14px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     max-width: 500px;
     width: 100%;
     padding: 30px;
+    transition: transform 0.3s ease;
+}
+
+.perfil-card:hover {
+    transform: translateY(-3px);
 }
 
 .perfil-header {
@@ -194,27 +239,31 @@ body {
     border-radius: 50%;
     object-fit: cover;
     margin-bottom: 15px;
+    border: 3px solid #4a90e2;
 }
 
 .nombre-usuario {
     margin: 0;
     font-size: 24px;
     color: #333;
+    font-weight: 600;
 }
 
 .correo-usuario {
-    color: #888;
+    color: #777;
     font-size: 14px;
 }
 
+/* Info */
 .perfil-info {
     margin-top: 20px;
 }
 
 .perfil-info h3 {
     font-size: 18px;
-    margin-bottom: 10px;
+    margin-bottom: 12px;
     color: #4a90e2;
+    font-weight: 600;
 }
 
 .perfil-info ul {
@@ -223,27 +272,33 @@ body {
 }
 
 .perfil-info li {
-    padding: 8px 0;
+    padding: 10px 0;
     border-bottom: 1px solid #f0f0f0;
     font-size: 15px;
 }
 
+.perfil-info li strong {
+    color: #555;
+}
+
+/* Botones */
 .perfil-acciones {
     margin-top: 30px;
     display: flex;
     justify-content: space-between;
-    gap: 10px;
+    gap: 12px;
 }
 
 .btn-editar,
 .btn-cerrar {
     flex: 1;
-    padding: 10px;
+    padding: 12px;
     font-size: 15px;
     border: none;
-    border-radius: 6px;
+    border-radius: 8px;
     cursor: pointer;
-    transition: background-color 0.3s;
+    transition: all 0.3s;
+    font-weight: 600;
 }
 
 .btn-editar {
@@ -263,3 +318,19 @@ body {
 .btn-cerrar:hover {
     background-color: #c0392b;
 }
+
+/* Responsividad */
+@media (max-width: 600px) {
+    .perfil-card {
+        padding: 20px;
+    }
+
+    .nombre-usuario {
+        font-size: 20px;
+    }
+
+    .perfil-acciones {
+        flex-direction: column;
+    }
+}
+

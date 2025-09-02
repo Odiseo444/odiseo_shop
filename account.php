@@ -1,6 +1,7 @@
 <?php
+$id= $_GET['id'];
 include_once 'inc\database.php';
-$sql = 'SELECT * FROM usuarios WHERE id_usuario=""';
+$sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
 $hacerConsulta = mysqli_query($conexion, $sql);
 $user = mysqli_fetch_array($hacerConsulta);
 ?>
@@ -10,15 +11,21 @@ $user = mysqli_fetch_array($hacerConsulta);
 <head>
     <meta charset="UTF-8">
     <title>Perfil del Usuario || Odiseo Shop</title>
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css/style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
+
+    <header class="header">
+        <button class="btn-volver" onclick="window.history.back()">⟵ Volver</button>
+        <h1>Perfil de Usuario</h1>
+    </header>
 
     <div class="perfil-contenedor">
         <div class="perfil-card">
             <div class="perfil-header">
-                <img src="https://via.placeholder.com/120" alt="Avatar del usuario" class="avatar">
-                <h2 class="nombre-usuario">Juan Pérez</h2>
+                <img src="img/user.png" alt="Avatar del usuario" class="avatar">
+                <h2 class="nombre-usuario"><?php echo $user['nombre']?></h2>
                 <p class="correo-usuario">juan.perez@email.com</p>
             </div>
             <div class="perfil-info">

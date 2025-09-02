@@ -1,9 +1,10 @@
 <?php
-$correo = $_GET['correo'] ?? '';
-$clave = $_GET['clave'] ?? '';
+$id = $_GET['id'] ?? $_POST['id'];
 include_once 'inc\database.php';
+$consult = 'SELECT * FROM usuarios WHERE id_usuario="$id"';
 $sql = 'SELECT * FROM productos';
 $hacerConsulta = mysqli_query($conexion, $sql);
+$doConsult = mysqli_query($conexion, $consult);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -21,8 +22,8 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 
 <!-- NAVBAR -->
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+  <a href="account.php?id=<?php echo $id ?>"><span class="material-symbols-outlined">account_circle</span></a>
   <div class="container">
-    <span class="material-symbols-outlined">account_circle</span>
     <a class="navbar-brand" href="#">Odiseo Shop</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
       <span class="navbar-toggler-icon"></span>
@@ -121,14 +122,24 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 <script>
     document.addEventListener( 'DOMContentLoaded', () => {
 
-    if (!(<?php echo $clave  ?> === '' || <?php echo $correo ?> === '')) {
+    if (!(<?php echo $id  ?> === '')) {
         localStorage.setItem('user', JSON.stringify({
-            correo: <?php echo $correo; ?>,
-            clave: <?php echo $clave; ?>
+            id: <?php echo $id; ?>
         }))
 }
     }
-    ) 
+    )
+    let id = localStorage.getItem('user');
+
+    fetch("index.php", {
+      method:"POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: 'id=' + id
+    }).catch(err => {
+      console.error('Error: ' + err)
+    })
 </script>
 </html>
 

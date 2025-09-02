@@ -10,7 +10,7 @@
     }
     while ($user) {
         if ($user['correo'] === $correo && $user['contrasena'] === $clave) {
-            header("location:index.php?correo='$correo'&&clave='$clave'");
+            header("location:index.php?id='$user[id_usuario]'");
            echo $recordar;
             exit;
         } else {
