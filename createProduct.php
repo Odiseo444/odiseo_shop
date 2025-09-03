@@ -32,8 +32,8 @@
             </div>
 
             <div class="form-grupo">
-                <label for="imagenes">Imágenes del Producto</label>
-                <input type="file" id="imagenes" name="imagenes" multiple accept="image/*">
+                <label for="imagenes">Imágen del Producto</label>
+                <input type="file" id="imagenes" name="img">
             </div>
 
             <div class="form-grupo">

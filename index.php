@@ -1,5 +1,8 @@
 <?php
 $id = $_GET['id'] ?? $_POST['id'];
+if ($id == null) {
+  header('location: user.php?warning=Inicia Sesión o registrate para ingresar');
+}
 include_once 'inc\database.php';
 $consult = 'SELECT * FROM usuarios WHERE id_usuario="$id"';
 $sql = 'SELECT * FROM productos';
@@ -74,7 +77,7 @@ $doConsult = mysqli_query($conexion, $consult);
       while ($products = mysqli_fetch_array($hacerConsulta)) {
         ?>
         <div class="producto-card">
-        <img src="https://via.placeholder.com/300x200" alt="Nombre del Producto" class="producto-imagen">
+        <img src="<?php echo $products['imagenes'] ?>" alt="Nombre del Producto" class="producto-imagen">
         <div class="producto-detalles">
             <h2 class="producto-nombre"><?php echo $products['nombre'] ?></h2>
             <p class="producto-descripcion"><?php echo $products['descripcion'] ?></p>
@@ -127,8 +130,6 @@ $doConsult = mysqli_query($conexion, $consult);
             id: <?php echo $id; ?>
         }))
 }
-    }
-    )
     let id = localStorage.getItem('user');
 
     fetch("index.php", {
@@ -140,6 +141,8 @@ $doConsult = mysqli_query($conexion, $consult);
     }).catch(err => {
       console.error('Error: ' + err)
     })
+    }
+    )
 </script>
 </html>
 
