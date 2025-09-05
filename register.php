@@ -10,5 +10,5 @@
     $sql = "INSERT INTO `usuarios`(`nombre`, `apellido`, `correo`, `contrasena`, `direccion_envio`, `telefono`, `fecha_registro`) VALUES ('$nombre','$apellido','$correo','$clave','null','$celular','$fecha_registro')";
     $hacerConsulta = mysqli_query($conexion, $sql);
 
-    header('location:index.php');
+    header('location:login.php?log=Ahora inicia Sesion');
 ?>

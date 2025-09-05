@@ -1,13 +1,14 @@
 <?php
-$id = $_GET['id'] ?? $_POST['id'];
-if ($id == null) {
-  header('location: user.php?warning=Inicia Sesión o registrate para ingresar');
-}
+session_start();
+
+$id = $_SESSION['id'] ?? '';
 include_once 'inc\database.php';
-$consult = 'SELECT * FROM usuarios WHERE id_usuario="$id"';
+if (!($id == '')) {
+  $consult = 'SELECT * FROM usuarios WHERE id_usuario="$id"';
+  $doConsult = mysqli_query($conexion, $consult);
+}
 $sql = 'SELECT * FROM productos';
 $hacerConsulta = mysqli_query($conexion, $sql);
-$doConsult = mysqli_query($conexion, $consult);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -122,27 +123,5 @@ $doConsult = mysqli_query($conexion, $consult);
   </div>
 </footer>
 </body>
-<script>
-    document.addEventListener( 'DOMContentLoaded', () => {
-
-    if (!(<?php echo $id  ?> === '')) {
-        localStorage.setItem('user', JSON.stringify({
-            id: <?php echo $id; ?>
-        }))
-}
-    let id = localStorage.getItem('user');
-
-    fetch("index.php", {
-      method:"POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: 'id=' + id
-    }).catch(err => {
-      console.error('Error: ' + err)
-    })
-    }
-    )
-</script>
 </html>
 

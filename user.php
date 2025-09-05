@@ -1,3 +1,18 @@
+<?php
+if (isset($_GET['warning'])) {
+  $log = $_GET['warning'];
+  echo "<script>
+  window.addEventListener('DOMContentLoaded', () => {
+  Swal.fire({
+title: '$log',
+icon: 'info',
+confirmButtonColor: '#3085d6',
+confirmButtonText: 'Yes, delete it!'
+});
+});
+  </script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="es">
 
@@ -125,6 +140,15 @@
       // Mostrar formulario de login por defecto
       showLoginBtn.click();
     });
+
+    window.addEventListener('DOMContentLoaded', () => {
+  Swal.fire({
+title: '$log',
+icon: 'info',
+confirmButtonColor: '#3085d6',
+confirmButtonText: 'Yes, delete it!'
+});
+});
   </script>
 </body>
 
