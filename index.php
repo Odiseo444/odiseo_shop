@@ -17,55 +17,68 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Odiseo Shop | Moda Masculina</title>
     <link href="css/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link rel="stylesheet" href="css\style.css">
     <script src="css/js/bootstrap.bundle.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;display=swap">
   </head>
   <body>
 
-<!-- NAVBAR -->
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-  <a href="account.php?id=<?php echo $id ?>"><span class="material-symbols-outlined">account_circle</span></a>
-  <div class="container">
-    <a class="navbar-brand" href="#">Odiseo Shop</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item"><a class="nav-link active" href="#">Inicio</a></li>
-        <li class="nav-item"><a class="nav-link" href="shop.php">Tienda</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Ofertas</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Contacto</a></li>
-        <li class="nav-item"><a class="nav-link" href="#"><i class="fas fa-shopping-cart"></i></a></li>
-      </ul>
-    </div>
+<header class="navbar">
+  <div class="header-left">
+    <a href="account.php?id=<?php echo $id ?>"><span class="material-symbols-outlined">account_circle</span></a>
+    <div class="logo">ODISEO SHOP</div>
   </div>
-</nav>
+    <nav class="nav-links">
+      <a href="#">Inicio</a>
+      <a href="#">Tienda</a>
+      <a href="#">Ofertas</a>
+      <a href="#">Contacto</a>
+    </nav>
+  </header>
 
-<!-- CARRUSEL -->
-<div id="carouselHero" class="carousel slide" data-bs-ride="carousel">
+  <!-- Hero Banner -->
+    <div id="carouselExampleCaptions" class="carousel slide">
+  <div class="carousel-indicators">
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+  </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="https://source.unsplash.com/1600x600/?men,fashion" class="d-block w-100" alt="Moda masculina">
+      <img src="img\plantilla-banner-moda-urbana_23-2148652497.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h2>Moda que define tu estilo</h2>
-        <p>Descubre nuestra colección de temporada</p>
-        <a href="#" class="btn btn-primary">Ver productos</a>
+        <h5>First slide label</h5>
+        <p>Some representative placeholder content for the first slide.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="https://source.unsplash.com/1600x600/?menswear,clothing" class="d-block w-100" alt="Ropa elegante">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Second slide label</h5>
+        <p>Some representative placeholder content for the second slide.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="..." class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Third slide label</h5>
+        <p>Some representative placeholder content for the third slide.</p>
+      </div>
     </div>
   </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselHero" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon"></span>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
   </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselHero" data-bs-slide="next">
-    <span class="carousel-control-next-icon"></span>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
   </button>
 </div>
+
+<!-- CARRUSEL -->
 
 <!-- PRODUCTOS DESTACADOS -->
 <section class="py-5 bg-light">
@@ -78,7 +91,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       while ($products = mysqli_fetch_array($hacerConsulta)) {
         ?>
         <div class="producto-card">
-        <img src="<?php echo $products['imagenes'] ?>" alt="Nombre del Producto" class="producto-imagen">
+        <img src="data:image/jpeg;base64,<?php echo $products['imagenes'] ?>" alt="Nombre del Producto" class="producto-imagen">
         <div class="producto-detalles">
             <h2 class="producto-nombre"><?php echo $products['nombre'] ?></h2>
             <p class="producto-descripcion"><?php echo $products['descripcion'] ?></p>

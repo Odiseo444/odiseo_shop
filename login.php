@@ -6,18 +6,15 @@ $clave = $_POST['clave'];
 include_once 'inc\database.php';
 $sql = 'SELECT * FROM usuarios';
 $hacerConsulta = mysqli_query($conexion, $sql);
-$user = mysqli_fetch_array($hacerConsulta);
 if (!($user)) {
     header('location:user.php?error=Credenciales incorrectas');
 }
-while ($user) {
-    $_SESSION['id'] = $user['id_usuario'];
+while ($user = mysqli_fetch_array($hacerConsulta)) {
     if ($user['correo'] === $correo && $user['contrasena'] === $clave) {
+        $_SESSION['id'] = $user['id_usuario'];
             header("location:index.php");
-            exit;
         } else {
             header('location:user.php?error=Credenciales incorrectas');
-            exit;
         }
     }
 ?>
