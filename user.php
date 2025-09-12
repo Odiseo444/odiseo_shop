@@ -5,9 +5,9 @@ if (isset($_GET['warning'])) {
   window.addEventListener('DOMContentLoaded', () => {
   Swal.fire({
 title: '$log',
-icon: 'info',
+icon: 'warning',
 confirmButtonColor: '#3085d6',
-confirmButtonText: 'Yes, delete it!'
+confirmButtonText: 'Aceptar'
 });
 });
   </script>";
@@ -22,6 +22,7 @@ confirmButtonText: 'Yes, delete it!'
   <title>Login y Registro</title>
   <!-- Bootstrap 5 CSS -->
   <link href="css\css\bootstrap.min.css" rel="stylesheet">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {
       background-color: #f8f9fa;
@@ -140,15 +141,6 @@ confirmButtonText: 'Yes, delete it!'
       // Mostrar formulario de login por defecto
       showLoginBtn.click();
     });
-
-    window.addEventListener('DOMContentLoaded', () => {
-  Swal.fire({
-title: '$log',
-icon: 'info',
-confirmButtonColor: '#3085d6',
-confirmButtonText: 'Yes, delete it!'
-});
-});
   </script>
 </body>
 

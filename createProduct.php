@@ -3,79 +3,79 @@
 <head>
     <meta charset="UTF-8">
     <title>Agregar Producto</title>
-    <link rel="stylesheet" href="css\style.css">
+    <link rel="stylesheet" href="css/panel.css">
 </head>
 <body>
 
-    <div class="contenedor">
-        <h1>Agregar Nuevo Producto</h1>
+<div class="form-container active">
+            <h2>Agregar Nuevo Producto</h2>
+            <form method="POST" action="subirProducto.php">
+                <div class="form-group">
+                    <label for="productName">Nombre del Producto *</label>
+                    <input type="text" class="form-control" id="productName" name="productName" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productPrice">Precio *</label>
+                    <input type="number" class="form-control" id="productPrice" name="productPrice" step="0.01" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productStock">Stock *</label>
+                    <input type="number" class="form-control" id="productStock" name="productStock" min="0" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productCategory">Categoría</label>
+                    <select name="categoria" class="form-control" id="productCategory">
+                        <option value="">hhhh</option>
+                    </select>
+                </div>
 
-        <form action="subirProducto.php" method="POST" enctype="multipart/form-data">
-            <div class="form-grupo">
-                <label for="nombre">Nombre del Producto</label>
-                <input type="text" id="nombre" name="nombre" required>
-            </div>
+                <div class="form-group">
+                    <label for="productSubCategory">Sub Categoría</label>
+                    <select name="subcategoria" class="form-control" id="productSubCategory">
+                        <option value="">hhhh</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="productDescription">Descripción</label>
+                    <textarea class="form-control" id="productDescription" name="productDescription" rows="4"></textarea>
+                </div>
 
-            <div class="form-grupo">
-                <label for="descripcion">Descripción</label>
-                <textarea id="descripcion" name="descripcion" rows="4" required></textarea>
-            </div>
+                <div class="form-group">
+                    <label for="mainImage">Imagen Principal *</label>
+                    <div class="image-upload-container">
+                        <label for="mainImage" class="upload-label">
+                            <div class="upload-icon">📷</div>
+                            <strong>Haz clic aquí o arrastra la imagen principal</strong>
+                            <br><small>Formatos: JPG, PNG, GIF - Máximo 5MB</small>
+                        </label>
+                        <input type="file" id="mainImage" name="mainImage" class="file-input" accept="image/*" required>
+                    </div>
+                    <div class="image-preview-container" id="mainImagePreview"></div>
+                </div>
 
-            <div class="form-grupo">
-                <label for="precio">Precio ($)</label>
-                <input type="number" step="0.01" id="precio" name="precio" required>
-            </div>
-
-            <div class="form-grupo">
-                <label for="stock">Stock</label>
-                <input type="number" id="stock" name="stock" required>
-            </div>
-
-            <div class="form-grupo">
-                <label for="imagenes">Imágen del Producto</label>
-                <input type="file" id="imagenes" name="img">
-            </div>
-
-            <div class="form-grupo">
-                <label for="marca">Marca</label>
-                <input type="text" id="marca" name="marca" required>
-            </div>
-
-            <div class="form-grupo">
-                <label for="categoria">Categoría</label>
-                <select id="categoria" name="categoria" required>
-                    <option value="">Seleccione una categoría</option>
-                    <option value="1">Electrónica</option>
-                    <option value="2">Ropa</option>
-                    <option value="3">Hogar</option>
-                    <!-- Agrega más categorías aquí -->
-                </select>
-            </div>
-
-            <div class="form-grupo">
-                <label for="subcategoria">Subcategoría</label>
-                <select id="subcategoria" name="subcategoria" required>
-                    <option value="">Seleccione una subcategoría</option>
-                    <option value="1">Teléfonos</option>
-                    <option value="2">Televisores</option>
-                    <option value="3">Lavadoras</option>
-                    <!-- Agrega más subcategorías aquí -->
-                </select>
-            </div>
-
-            <div class="form-grupo">
-                <label for="fecha_creacion">Fecha de Creación</label>
-                <input type="date" id="fecha_creacion" name="fecha_creacion" required>
-            </div>
-
-            <div class="form-grupo">
-                <label for="ultima_actualizacion">Última Actualización</label>
-                <input type="date" id="ultima_actualizacion" name="ultima_actualizacion" required>
-            </div>
-
-            <button type="submit" class="btn">Guardar Producto</button>
-        </form>
-    </div>
+                <div class="form-group">
+                    <label for="galleryImages">Imágenes de Galería (Opcional)</label>
+                    <div class="image-upload-container">
+                        <label for="galleryImages" class="upload-label">
+                            <div class="upload-icon">🖼️</div>
+                            <strong>Selecciona múltiples imágenes para la galería</strong>
+                            <br><small>Puedes seleccionar hasta 5 imágenes adicionales</small>
+                        </label>
+                        <input type="file" id="galleryImages" name="galleryImages[]" class="file-input" accept="image/*" multiple>
+                    </div>
+                    <div class="image-preview-container" id="galleryPreview"></div>
+                </div>
+                
+                <div class="form-group">
+                    <button type="submit" class="btn btn-success" name="addProduct">Agregar Producto</button>
+                    <button type="button" class="btn btn-danger" onclick="window.location.replace('panel.php')">Cancelar</button>
+                </div>
+            </form>
+        </div>
 
 </body>
 </html>

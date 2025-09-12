@@ -4,8 +4,9 @@ session_start();
 $id = $_SESSION['id'] ?? '';
 include_once 'inc\database.php';
 if (!($id == '')) {
-  $consult = 'SELECT * FROM usuarios WHERE id_usuario="$id"';
+  $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
   $doConsult = mysqli_query($conexion, $consult);
+  $user = mysqli_fetch_array($doConsult);
 }
 $sql = 'SELECT * FROM productos';
 $hacerConsulta = mysqli_query($conexion, $sql);
@@ -35,6 +36,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       <a href="#">Tienda</a>
       <a href="#">Ofertas</a>
       <a href="#">Contacto</a>
+      <?php if ($user['rol'] === '0') {echo '<a href="panel.php">Panel de productos</a>'; } ?>
     </nav>
   </header>
 
@@ -91,7 +93,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       while ($products = mysqli_fetch_array($hacerConsulta)) {
         ?>
         <div class="producto-card">
-        <img src="data:image/jpeg;base64,<?php echo $products['imagenes'] ?>" alt="Nombre del Producto" class="producto-imagen">
+        <img src="data:image/jpeg;base64,<?php echo $products['imagen'] ?>" alt="Nombre del Producto" class="producto-imagen">
         <div class="producto-detalles">
             <h2 class="producto-nombre"><?php echo $products['nombre'] ?></h2>
             <p class="producto-descripcion"><?php echo $products['descripcion'] ?></p>

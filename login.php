@@ -10,7 +10,7 @@ if (!($user)) {
     header('location:user.php?error=Credenciales incorrectas');
 }
 while ($user = mysqli_fetch_array($hacerConsulta)) {
-    if ($user['correo'] === $correo && $user['contrasena'] === $clave) {
+    if ($user['correo'] === $correo && $user['clave'] === $clave) {
         $_SESSION['id'] = $user['id_usuario'];
             header("location:index.php");
         } else {

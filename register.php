@@ -7,8 +7,17 @@
     $fecha_registro = date('Y-m-d H:i:s');
 
     include_once 'inc\database.php';
-    $sql = "INSERT INTO `usuarios`(`nombre`, `apellido`, `correo`, `contrasena`, `direccion_envio`, `telefono`, `fecha_registro`) VALUES ('$nombre','$apellido','$correo','$clave','null','$celular','$fecha_registro')";
+    $consult = "SELECT * FROM usuarios";
+    $doConsult = mysqli_query($conexion, $consult);
+    while ($user = mysqli_fetch_array($doConsult)) {
+        if ($user['correo'] === $correo) {
+            header('location:user.php?warning=Ya existe una cuenta con ese correo, inicia sesion o intenta con otro');
+        } else if ($user['telefono'] === $celular) {
+            header('location:user.php?warning=Ya existe una cuenta con ese numero telefonico, inicia sesion o intenta con otro');
+        }
+    }
+    
+    $sql = "INSERT INTO `usuarios`(`nombre`, `apellido`, `correo`, `clave`, `direccion_envio`, `telefono`, `fecha_registro`, `rol`) VALUES ('$nombre','$apellido','$correo','$clave','null','$celular','$fecha_registro', '1')";
     $hacerConsulta = mysqli_query($conexion, $sql);
-
-    header('location:login.php?log=Ahora inicia Sesion');
+    header('location:user.php?log=Ahora inicia Sesion');
 ?>
