@@ -1,11 +1,24 @@
 <?php
-if (isset($_GET['warning'])) {
-  $log = $_GET['warning'];
+if (isset($_GET['log'])) {
+  $log = $_GET['log'];
   echo "<script>
   window.addEventListener('DOMContentLoaded', () => {
   Swal.fire({
 title: '$log',
 icon: 'warning',
+confirmButtonColor: '#3085d6',
+confirmButtonText: 'Aceptar'
+});
+});
+  </script>";
+}
+if (isset($_GET['err'])) {
+  $log = $_GET['err'];
+  echo "<script>
+  window.addEventListener('DOMContentLoaded', () => {
+  Swal.fire({
+title: '$log',
+icon: 'error',
 confirmButtonColor: '#3085d6',
 confirmButtonText: 'Aceptar'
 });

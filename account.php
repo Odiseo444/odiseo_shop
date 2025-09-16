@@ -2,7 +2,7 @@
 session_start();
 $id= $_GET['id'] ?? $_SESSION['id'];
 if ($id == null) {
-    header('location: user.php?warning=Inicia Sesión o Registrate para ingresar');
+    header('location: user.php?log=Inicia Sesión o Registrate para ingresar');
 }
 include_once 'inc\database.php';
 $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
