@@ -26,7 +26,7 @@ USE `odiseoshop`;
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `categorias`
+-- Table structure for table `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -34,10 +34,22 @@ CREATE TABLE `categorias` (
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `categorias`
+--
+
+INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
+(1, 'Ropa Superior'),
+(2, 'Ropa Inferior'),
+(3, 'Ropa Formal'),
+(4, 'Ropa Deportiva'),
+(5, 'Calzado'),
+(6, 'Accesorios');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `productos`
+-- Table structure for table `productos`
 --
 
 CREATE TABLE `productos` (
@@ -58,7 +70,7 @@ CREATE TABLE `productos` (
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `subcategorias`
+-- Table structure for table `subcategorias`
 --
 
 CREATE TABLE `subcategorias` (
@@ -67,10 +79,67 @@ CREATE TABLE `subcategorias` (
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
+--
+-- Dumping data for table `subcategorias`
+--
+
+INSERT INTO `subcategorias` (`id_subcategoria`, `id_categoria`, `nombre`) VALUES
+(1, 1, 'Camisetas Básicas'),
+(2, 1, 'Camisetas Estampadas'),
+(3, 1, 'Polos'),
+(4, 1, 'Oversize'),
+(5, 1, 'Camisas Formales'),
+(6, 1, 'Camisas Casual'),
+(7, 1, 'Camisas de lino'),
+(8, 1, 'Camisas manga corta'),
+(9, 1, 'Suéteres'),
+(10, 1, 'Buzos'),
+(11, 1, 'Hoodies'),
+(12, 1, 'Cardigans'),
+(13, 1, 'Chaquetas de denim'),
+(14, 1, 'Chaquetas de cuero'),
+(15, 1, 'Bomber'),
+(16, 1, 'Abrigos largos'),
+(17, 1, 'Chalecos'),
+(18, 2, 'Jeans Skinny'),
+(19, 2, 'Jeans Slim'),
+(20, 2, 'Jeans Regular'),
+(21, 2, 'Jeans Rotos'),
+(22, 2, 'Pantalones Cargo'),
+(23, 2, 'Joggers'),
+(24, 2, 'Chinos'),
+(25, 2, 'Pantalones Formales'),
+(26, 2, 'Shorts Casual'),
+(27, 2, 'Shorts Deportivos'),
+(28, 2, 'Shorts Cargo'),
+(29, 3, 'Trajes - Sacos'),
+(30, 3, 'Trajes - Pantalones de vestir'),
+(31, 3, 'Camisas Formales'),
+(32, 3, 'Corbatas'),
+(33, 3, 'Pajaritas'),
+(34, 3, 'Chalecos de vestir'),
+(35, 4, 'Camisetas deportivas'),
+(36, 4, 'Shorts deportivos'),
+(37, 4, 'Joggers deportivos'),
+(38, 4, 'Sudaderas'),
+(39, 4, 'Ropa de gimnasio'),
+(40, 5, 'Sneakers'),
+(41, 5, 'Zapatos formales'),
+(42, 5, 'Botas'),
+(43, 5, 'Sandalias'),
+(44, 6, 'Gorras'),
+(45, 6, 'Sombreros'),
+(46, 6, 'Cinturones'),
+(47, 6, 'Carteras / Billeteras'),
+(48, 6, 'Relojes'),
+(49, 6, 'Gafas de sol'),
+(50, 6, 'Bufandas'),
+(51, 6, 'Guantes');
+
 -- --------------------------------------------------------
 
 --
--- Estructura de tabla para la tabla `usuarios`
+-- Table structure for table `usuarios`
 --
 
 CREATE TABLE `usuarios` (
@@ -87,24 +156,24 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Volcado de datos para la tabla `usuarios`
+-- Dumping data for table `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `correo`, `clave`, `direccion_envio`, `telefono`, `fecha_registro`, `imagen_perfil`, `rol`) VALUES
 (1, 'Hector', 'Maza', 'manuelhmhd@gmail.com', '12345', 'cl 46n #4n 31', '3054780788', '2025-09-13 02:25:15', NULL, '0');
 
 --
--- Índices para tablas volcadas
+-- Indexes for dumped tables
 --
 
 --
--- Indices de la tabla `categorias`
+-- Indexes for table `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indices de la tabla `productos`
+-- Indexes for table `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
@@ -112,60 +181,60 @@ ALTER TABLE `productos`
   ADD KEY `id_subcategoria` (`id_subcategoria`);
 
 --
--- Indices de la tabla `subcategorias`
+-- Indexes for table `subcategorias`
 --
 ALTER TABLE `subcategorias`
   ADD PRIMARY KEY (`id_subcategoria`),
   ADD KEY `id_categoria` (`id_categoria`);
 
 --
--- Indices de la tabla `usuarios`
+-- Indexes for table `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
--- AUTO_INCREMENT de las tablas volcadas
+-- AUTO_INCREMENT for dumped tables
 --
 
 --
--- AUTO_INCREMENT de la tabla `categorias`
+-- AUTO_INCREMENT for table `categorias`
 --
 ALTER TABLE `categorias`
-  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT de la tabla `productos`
+-- AUTO_INCREMENT for table `productos`
 --
 ALTER TABLE `productos`
   MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT de la tabla `subcategorias`
+-- AUTO_INCREMENT for table `subcategorias`
 --
 ALTER TABLE `subcategorias`
-  MODIFY `id_subcategoria` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_subcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT de la tabla `usuarios`
+-- AUTO_INCREMENT for table `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- Restricciones para tablas volcadas
+-- Constraints for dumped tables
 --
 
 --
--- Filtros para la tabla `productos`
+-- Constraints for table `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_subcategoria`) REFERENCES `subcategorias` (`id_subcategoria`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Filtros para la tabla `subcategorias`
+-- Constraints for table `subcategorias`
 --
 ALTER TABLE `subcategorias`
   ADD CONSTRAINT `subcategorias_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;
