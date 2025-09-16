@@ -29,7 +29,7 @@ USE `odiseoshop`;
 -- Table structure for table `categorias`
 --
 
-CREATE TABLE `categorias` (
+CREATE TABLE IF NOT EXISTS `categorias` (
   `id_categoria` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
@@ -52,7 +52,7 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
 -- Table structure for table `productos`
 --
 
-CREATE TABLE `productos` (
+CREATE TABLE IF NOT EXISTS `productos` (
   `id_producto` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `descripcion` text DEFAULT NULL,
@@ -73,7 +73,7 @@ CREATE TABLE `productos` (
 -- Table structure for table `subcategorias`
 --
 
-CREATE TABLE `subcategorias` (
+CREATE TABLE IF NOT EXISTS `subcategorias` (
   `id_subcategoria` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
@@ -142,7 +142,7 @@ INSERT INTO `subcategorias` (`id_subcategoria`, `id_categoria`, `nombre`) VALUES
 -- Table structure for table `usuarios`
 --
 
-CREATE TABLE `usuarios` (
+CREATE TABLE IF NOT EXISTS `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,

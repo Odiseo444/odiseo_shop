@@ -15,7 +15,22 @@ if (!($id == '')) {
     }
 
 }
-$sql = 'SELECT * FROM productos';
+$sql = 'SELECT 
+    p.id_producto,
+    p.nombre AS nombre,
+    p.descripcion,
+    p.precio,
+    p.stock,
+    p.imagen,
+    p.imagenes,
+    p.marca,
+    c.nombre AS categoria,
+    s.nombre AS subcategoria,
+    p.fecha_creacion,
+    p.ultima_actualizacion
+FROM productos p
+INNER JOIN categorias c ON p.id_categoria = c.id_categoria
+INNER JOIN subcategorias s ON p.id_subcategoria = s.id_subcategoria;';
 $hacerConsulta = mysqli_query($conexion, $sql);
 ?>
 <!DOCTYPE html>
@@ -83,10 +98,10 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                                 </div>
                                 <div class="product-stock stock-high"><?php echo $products['stock'] ?></div>
                             </div>
-                            <p><strong>Categoría:</strong> <?php echo $products['precio'] ?></p>
+                            <p><strong>Categoría:</strong> <?php echo $products['categoria'] ?></p>
                             <p class="product-description"><?php echo $products['descripcion'] ?></p>
                             <div class="product-actions">
-                                <button class="btn btn-warning btn-sm" onclick="">Editar</button>
+                                <button class="btn btn-warning btn-sm" onclick="window.location.href = 'updateProduct.php?id=<?php echo $products['id_producto'] ?>'">Editar</button>
                                 <button class="btn btn-danger btn-sm">Eliminar</button>
                             </div>
                         </div>
@@ -94,47 +109,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                 </div>
             <?php } ?>
             
-            <div class="product-card">
-                <div class="product-content">
-                    <div class="product-image-section">
-                        <div class="image-placeholder">
-                            <div>📷</div>
-                            Sin imagen disponible
-                        </div>
-                    </div>
-                    <div class="product-details">
-                        <div class="product-header">
-                            <div class="product-info">
-                                <h3>Zapatillas Deportivas</h3>
-                                <div class="product-price">$120.00</div>
-                            </div>
-                            <div class="product-stock stock-low">8 unidades</div>
-                        </div>
-                        <p><strong>Categoría:</strong> Calzado</p>
-                        <p class="product-description">Zapatillas ideales para running y actividades deportivas con tecnología de amortiguación avanzada.</p>
-                        <div class="product-actions">
-                            <button class="btn btn-warning btn-sm">Editar</button>
-                            <button class="btn btn-danger btn-sm">Eliminar</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="product-card">
-                <div class="product-header">
-                    <div class="product-info">
-                        <h3>Zapatillas Deportivas</h3>
-                        <div class="product-price">$120.00</div>
-                    </div>
-                    <div class="product-stock stock-low">8 unidades</div>
-                </div>
-                <p><strong>Categoría:</strong> Calzado</p>
-                <p class="product-description">Zapatillas ideales para running y actividades deportivas</p>
-                <div class="product-actions">
-                    <button class="btn btn-warning btn-sm">Editar</button>
-                    <button class="btn btn-danger btn-sm">Eliminar</button>
-                </div>
-            </div>
-
+            
             <!-- No products message -->
             <!-- <div class="no-products">No hay productos para mostrar</div> -->
         </div>

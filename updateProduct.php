@@ -10,13 +10,19 @@ if (!($id == '')) {
     } else {
     header('location:index.php');
 
+}
     if ($user['rol'] === '1') {
         header('location:index.php');
     }
 
-}
 $sql = 'SELECT * FROM categorias';
 $hacerConsulta = mysqli_query($conexion, $sql);
+
+$idProd = $_GET['id'];
+
+$consulta = "SELECT * FROM productos WHERE id_producto='$idProd'";
+$obtenerConsulta = mysqli_query($conexion, $consulta);
+$product = mysqli_fetch_array($obtenerConsulta);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -32,22 +38,22 @@ $hacerConsulta = mysqli_query($conexion, $sql);
             <form method="POST" action="subirProducto.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="productName">Nombre del Producto *</label>
-                    <input type="text" class="form-control" id="productName" name="nombre" required>
+                    <input type="text" value="<?php echo $product['nombre'] ?>" class="form-control" id="productName" name="nombre" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="productPrice">Precio *</label>
-                    <input type="number" class="form-control" id="productPrice" name="precio" step="0.01" min="0" required>
+                    <input type="number" value="<?php echo $product['precio'] ?>" class="form-control" id="productPrice" name="precio" step="0.01" min="0" required>
                 </div>
                 
                 <div class="form-group">
                     <label for="productStock">Stock *</label>
-                    <input type="number" class="form-control" id="productStock" name="stock" min="0" required>
+                    <input type="number" value="<?php echo $product['stock'] ?>" class="form-control" id="productStock" name="stock" min="0" required>
                 </div>
 
                 <div class="form-group">
                     <label for="marca">Marca *</label>
-                    <input type="text" class="form-control" id="marca" name="marca" required>
+                    <input type="text" value="<?php echo $product['marca'] ?>" class="form-control" id="marca" name="marca" required>
                 </div>
                 
                 <div class="form-group">
@@ -55,7 +61,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                     <select name="categoria" class="form-control" id="productCategory">
                         <option value="" selected>Selecciona una categoria</option>
                     <?php while ($categ = mysqli_fetch_array($hacerConsulta)) { ?>    
-                    <option value="<?php echo $categ['id_categoria'] ?>"><?php echo $categ['nombre'] ?></option>
+                    <option value="<?php echo $categ['id_categoria'] ?>" <?php if ($categ['id_categoria'] == $product['id_categoria']) echo 'selected'?>><?php echo $categ['nombre'] ?></option>
                     <?php } ?>
                     </select>
                 </div>
@@ -69,7 +75,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                 
                 <div class="form-group">
                     <label for="productDescription">Descripción</label>
-                    <textarea class="form-control" id="productDescription" name="descripcion" rows="4"></textarea>
+                    <textarea class="form-control" id="productDescription" name="descripcion" rows="4"><?php echo $product['descripcion'] ?></textarea>
                 </div>
 
                 <div class="form-group">
@@ -127,7 +133,25 @@ document.getElementById('productCategory').addEventListener('change', function()
         })
         .catch(err => console.error(err));
 });
-</script>
 
+document.addEventListener('DOMContentLoaded', () => {
+    categoriaId = document.getElementById('productCategory').value
+    if (categoriaId == "") {
+        console.error('error')
+    }
+    fetch("get_subcategories.php?categoria_id=" + categoriaId)
+        .then(res => res.json())
+        .then(data => {
+            let subcatSelect = document.getElementById('productSubCategory');
+            subcatSelect.innerHTML = "<option value=''>-- Selecciona Subcategoría --</option>";
+            data.forEach(subcat => {
+                let selected = subcat.id_subcategoria == <?php echo $product['id_subcategoria'] ?> ? 'selected' : ''
+                console.log('hola')
+                subcatSelect.innerHTML += `<option value="${subcat.id_subcategoria}" ${selected}>${subcat.nombre}</option>`;
+            });
+        })
+        .catch(err => console.error(err));
+})
+</script>
 </body>
 </html>
