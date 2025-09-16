@@ -58,7 +58,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                 <div class="form-group">
                     <label for="productSubCategory">Sub Categoría</label>
                     <select name="subcategoria" class="form-control" id="productSubCategory">
-                        <option value=""><?php if () ?></option>
+                        <option value=""></option>
                     </select>
                 </div>
                 
@@ -99,6 +99,30 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                 </div>
             </form>
         </div>
+<script>
+document.getElementById('productCategory').addEventListener('change', function() {
+    let categoriaId = this.value;
+
+    // Si no hay categoría seleccionada, vacía el select
+    if(categoriaId === ""){
+        document.getElementById('productSubCategory').innerHTML = "<option value=''>-- Selecciona Subcategoría --</option>";
+        return;
+    }
+
+    // Hacemos petición AJAX a PHP
+    fetch("get_subcategories.php?categoria_id=" + categoriaId)
+        .then(res => res.json())
+        .then(data => {
+            let subcatSelect = document.getElementById('productSubCategory');
+            subcatSelect.innerHTML = "<option value=''>-- Selecciona Subcategoría --</option>";
+
+            data.forEach(subcat => {
+                subcatSelect.innerHTML += `<option value="${subcat.id_subcategoria}">${subcat.nombre}</option>`;
+            });
+        })
+        .catch(err => console.error(err));
+});
+</script>
 
 </body>
 </html>
