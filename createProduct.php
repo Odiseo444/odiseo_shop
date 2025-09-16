@@ -1,3 +1,23 @@
+<?php
+session_start();
+
+$id = $_SESSION['id'];
+if (!($id == '')) {
+    include_once 'inc\database.php';
+    $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
+    $doConsult = mysqli_query($conexion, $consult);
+    $user = mysqli_fetch_array($doConsult);
+    } else {
+    header('location:index.php');
+
+    if ($user['rol'] === '1') {
+        header('location:index.php');
+    }
+
+}
+$sql = 'SELECT * FROM categorias';
+$hacerConsulta = mysqli_query($conexion, $sql);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -28,14 +48,17 @@
                 <div class="form-group">
                     <label for="productCategory">Categoría</label>
                     <select name="categoria" class="form-control" id="productCategory">
-                        <option value="">hhhh</option>
+                        <option value="" selected>Selecciona una categoria</option>
+                    <?php while ($categ = mysqli_fetch_array($hacerConsulta)) { ?>    
+                    <option value="<?php echo $categ['id_categoria'] ?>"><?php echo $categ['nombre'] ?></option>
+                    <?php } ?>
                     </select>
                 </div>
 
                 <div class="form-group">
                     <label for="productSubCategory">Sub Categoría</label>
                     <select name="subcategoria" class="form-control" id="productSubCategory">
-                        <option value="">hhhh</option>
+                        <option value=""><?php if () ?></option>
                     </select>
                 </div>
                 

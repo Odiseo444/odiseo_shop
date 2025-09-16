@@ -36,7 +36,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       <a href="#">Tienda</a>
       <a href="#">Ofertas</a>
       <a href="#">Contacto</a>
-      <?php if ($user['rol'] === '0') {echo '<a href="panel.php">Panel de productos</a>'; } ?>
+      <?php if (isset($user)) if ($user['rol'] === '0') {echo '<a href="panel.php">Panel de productos</a>'; } ?>
     </nav>
   </header>
 
