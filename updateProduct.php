@@ -88,10 +88,12 @@ $product = mysqli_fetch_array($obtenerConsulta);
                         </label>
                         <input type="file" id="mainImg" name="imagen" class="file-input" accept="image/*" required>
                     </div>
-                    <div class="image-preview-container" id="mainImagePreview"></div>
+                    <div class="image-preview-container" id="mainImagePreview">
+                        <?php echo "<img src='data:image/jpeg;base64,". $product['imagen'] . "' class='image-preview' alt=''>" ?>
+                    </div>
                 </div>
 
-                <div class="form-group">
+                <!-- <div class="form-group">
                     <label for="galleryImages">Imágenes de Galería (Opcional)</label>
                     <div class="image-upload-container">
                         <label for="galleryImages" class="upload-label">
@@ -102,7 +104,7 @@ $product = mysqli_fetch_array($obtenerConsulta);
                         <input type="file" id="galleryImages" name="imagenes[]" class="file-input" accept="image/*" multiple>
                     </div>
                     <div class="image-preview-container" id="galleryPreview"></div>
-                </div>
+                </div> -->
                 
                 <div class="form-group">
                     <button type="submit" class="btn btn-success" name="addProduct">Agregar Producto</button>
@@ -111,6 +113,30 @@ $product = mysqli_fetch_array($obtenerConsulta);
             </form>
         </div>
 <script>
+    const fileInput = document.getElementById('mainImg');
+    const filesInput = document.getElementById('galleryImages');
+    const mainImagePreview = document.getElementById('mainImagePreview');
+    const galleryImages = document.getElementById('galleryPreview');
+
+    fileInput.addEventListener('change', () => {
+        const file = fileInput.files[0];
+        if (file) {
+            const imageUrl = URL.createObjectURL(file);
+            mainImagePreview.innerHTML = `<img src="${imageUrl}" class='image-preview' alt="">`
+        }
+    });
+
+    /* filesInput.addEventListener('change', () => {
+        galleryImages.innerHTML = "";
+        const files = filesInput.files;
+        for (const file of files) {
+            if (file.type.startsWith('image/')) {
+                const imageUrl = URL.createObjectURL(file);
+                galleryImages.innerHTML += `<img src="${imageUrl}" class='image-preview' alt="">`;
+            }
+        }
+    }); */
+
 document.getElementById('productCategory').addEventListener('change', function() {
     let categoriaId = this.value;
 

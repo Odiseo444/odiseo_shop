@@ -84,10 +84,10 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                             <img src="data:image/jpeg;base64,<?php echo $products['imagen'] ?>" alt="imagen" class="product-main-image">
                             <div class="product-gallery">
                                 <?php 
-                                $imagenes = json_decode($products['imagenes']);
-                                for ($i = 0; $i <= count($imagenes); $i++) { ?>
-                                <img src="data:image/jpeg;base64,<?php echo $imagenes[$i] ?>" alt="Vista" class="product-gallery-image">
-                                <?php } ?>
+                                //$imagenes = json_decode($products['imagenes']);
+                                //for ($i = 0; $i <= count($imagenes); $i++) { ?>
+                                <!-- <img src="data:image/jpeg;base64,<?php // echo $imagenes[$i] ?>" alt="Vista" class="product-gallery-image"> -->
+                                <?php //} ?>
                             </div>
                         </div>
                         <div class="product-details">
