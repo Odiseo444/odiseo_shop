@@ -3,16 +3,16 @@ session_start();
 
 $id = $_SESSION['id'];
 if (!($id == '')) {
-    include_once 'inc\database.php';
+    include_once '../inc\database.php';
     $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
     $doConsult = mysqli_query($conexion, $consult);
     $user = mysqli_fetch_array($doConsult);
     } else {
-    header('location:index.php');
+    header('location:../index.php');
 
 }
     if ($user['rol'] === '1') {
-        header('location:index.php');
+        header('location:../index.php');
     }
 
 $sql = 'SELECT * FROM categorias';
@@ -28,14 +28,14 @@ $product = mysqli_fetch_array($obtenerConsulta);
 <html lang="es">
 <head>
     <meta charset="UTF-8">
-    <title>Agregar Producto</title>
-    <link rel="stylesheet" href="css/panel.css">
+    <title>Actualizar Producto</title>
+    <link rel="stylesheet" href="../css/panel.css">
 </head>
 <body>
 
 <div class="form-container active">
-            <h2>Agregar Nuevo Producto</h2>
-            <form method="POST" action="subirProducto.php" enctype="multipart/form-data">
+            <h2>Actualizar Producto</h2>
+            <form method="POST" action="actualizarProducto.php" enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="productName">Nombre del Producto *</label>
                     <input type="text" value="<?php echo $product['nombre'] ?>" class="form-control" id="productName" name="nombre" required>

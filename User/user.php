@@ -34,7 +34,7 @@ confirmButtonText: 'Aceptar'
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Login y Registro</title>
   <!-- Bootstrap 5 CSS -->
-  <link href="css\css\bootstrap.min.css" rel="stylesheet">
+  <link href="../css\css\bootstrap.min.css" rel="stylesheet">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <style>
     body {

@@ -3,15 +3,15 @@ session_start();
 
 $id = $_SESSION['id'];
 if (!($id == '')) {
-    include_once 'inc\database.php';
+    include_once '../inc\database.php';
     $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
     $doConsult = mysqli_query($conexion, $consult);
     $user = mysqli_fetch_array($doConsult);
     } else {
-    header('location:index.php');
+    header('location:../index.php');
 
     if ($user['rol'] === '1') {
-        header('location:index.php');
+        header('location:../index.php');
     }
 
 }
@@ -39,7 +39,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Panel de Administración - Odiseo Shop</title>
-    <link rel="stylesheet" href="css/panel.css">
+    <link rel="stylesheet" href="../css/panel.css">
 </head>
 <body>
     <div class="container">

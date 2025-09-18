@@ -3,19 +3,33 @@ session_start();
 
 $id = $_SESSION['id'];
 if (!($id == '')) {
-    include_once 'inc\database.php';
+    include_once '../inc\database.php';
     $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
     $doConsult = mysqli_query($conexion, $consult);
     $user = mysqli_fetch_array($doConsult);
 } else {
-    header('location:index.php');
+    header('../location:index.php');
 
     if ($user['rol'] === '1') {
-        header('location:index.php');
+        header('../location:index.php');
     }
 }
 $sql = 'SELECT * FROM categorias';
 $hacerConsulta = mysqli_query($conexion, $sql);
+
+if (isset($_GET['log'])) {
+  $log = $_GET['log'];
+  echo "<script>
+  window.addEventListener('DOMContentLoaded', () => {
+  Swal.fire({
+title: '$log',
+icon: 'warning',
+confirmButtonColor: '#3085d6',
+confirmButtonText: 'Aceptar'
+});
+});
+  </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -23,7 +37,8 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 <head>
     <meta charset="UTF-8">
     <title>Agregar Producto</title>
-    <link rel="stylesheet" href="css/panel.css">
+    <link rel="stylesheet" href="../css/panel.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>

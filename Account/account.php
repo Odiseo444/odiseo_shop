@@ -2,9 +2,9 @@
 session_start();
 $id= $_GET['id'] ?? $_SESSION['id'];
 if ($id == null) {
-    header('location: user.php?log=Inicia Sesión o Registrate para ingresar');
+    header('location:../User/user.php?log=Inicia Sesión o Registrate para ingresar');
 }
-include_once 'inc\database.php';
+include_once '../inc\database.php';
 $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
 $hacerConsulta = mysqli_query($conexion, $sql);
 $user = mysqli_fetch_array($hacerConsulta);
@@ -28,21 +28,21 @@ if (isset($_GET['log'])) {
 <head>
     <meta charset="UTF-8">
     <title>Perfil del Usuario || Odiseo Shop</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
     <header class="header">
-        <button class="btn-volver" onclick="window.location.href = 'index.php'">⟵ Volver</button>
+        <button class="btn-volver" onclick="window.location.href = '../index.php'">⟵ Volver</button>
         <h1>Perfil de Usuario</h1>
     </header>
 
     <div class="perfil-contenedor">
         <div class="perfil-card">
             <div class="perfil-header">
-                <img src="img/user.png" alt="Avatar del usuario" class="avatar">
+                <img src="../img/user.png" alt="Avatar del usuario" class="avatar">
                 <h2 class="nombre-usuario"><?php echo $user['nombre'] . " " . $user['apellido'] ?></h2>
                 <p class="correo-usuario"><?php echo $user['correo'] ?></p>
             </div>

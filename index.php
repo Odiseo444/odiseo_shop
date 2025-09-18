@@ -28,7 +28,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 
 <header class="navbar">
   <div class="header-left">
-    <a href="account.php?id=<?php echo $id ?>"><span class="material-symbols-outlined">account_circle</span></a>
+    <a href="Account/account.php?id=<?php echo $id ?>"><span class="material-symbols-outlined">account_circle</span></a>
     <div class="logo">ODISEO SHOP</div>
   </div>
     <nav class="nav-links">
@@ -36,7 +36,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       <a href="#">Tienda</a>
       <a href="#">Ofertas</a>
       <a href="#">Contacto</a>
-      <?php if (isset($user)) if ($user['rol'] === '0') {echo '<a href="panel.php">Panel de productos</a>'; } ?>
+      <?php if (isset($user)) if ($user['rol'] === '0') {echo '<a href="Panel/panel.php">Panel de productos</a>'; } ?>
     </nav>
   </header>
 

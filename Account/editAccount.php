@@ -2,9 +2,22 @@
 session_start();
 $id= $_GET['id'] ?? $_SESSION['id'];
 if ($id == null) {
-    header('location: user.php?warning=Inicia Sesión o registrate para ingresar');
+    header('location: ../user.php?warning=Inicia Sesión o registrate para ingresar');
 }
-include_once 'inc\database.php';
+if (isset($_GET['log'])) {
+  $log = $_GET['log'];
+  echo "<script>
+  window.addEventListener('DOMContentLoaded', () => {
+  Swal.fire({
+title: '$log',
+icon: 'warning',
+confirmButtonColor: '#3085d6',
+confirmButtonText: 'Aceptar'
+});
+});
+  </script>";
+}
+include_once '../inc\database.php';
 $sql = "SELECT * FROM usuarios WHERE id_usuario=$id";
 $hacerConsulta = mysqli_query($conexion, $sql);
 $user = mysqli_fetch_array($hacerConsulta);
@@ -15,8 +28,9 @@ $user = mysqli_fetch_array($hacerConsulta);
 <head>
     <meta charset="UTF-8">
     <title>Perfil del Usuario || Odiseo Shop</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="../css/style.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 <body>
 
@@ -27,7 +41,7 @@ $user = mysqli_fetch_array($hacerConsulta);
     <div class="perfil-contenedor">
         <div class="perfil-card">
             <div class="perfil-header">
-                <img src="img/user.png" alt="Avatar del usuario" class="avatar">
+                <img src="../img/user.png" alt="Avatar del usuario" class="avatar">
                 <h2 class="nombre-usuario">Editar perfil</h2>
                 <p class="correo-usuario"><?php echo $user['nombre'] . " " . $user['apellido'] ?></p>
             </div>
