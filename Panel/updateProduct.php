@@ -35,7 +35,7 @@ $product = mysqli_fetch_array($obtenerConsulta);
 
 <div class="form-container active">
             <h2>Actualizar Producto</h2>
-            <form method="POST" action="actualizarProducto.php" enctype="multipart/form-data">
+            <form method="POST" action='actualizarProducto.php?id=<?php echo $idProd ?>' enctype="multipart/form-data">
                 <div class="form-group">
                     <label for="productName">Nombre del Producto *</label>
                     <input type="text" value="<?php echo $product['nombre'] ?>" class="form-control" id="productName" name="nombre" required>

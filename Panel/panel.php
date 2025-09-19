@@ -102,7 +102,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                             <p class="product-description"><?php echo $products['descripcion'] ?></p>
                             <div class="product-actions">
                                 <button class="btn btn-warning btn-sm" onclick="window.location.href = 'updateProduct.php?id=<?php echo $products['id_producto'] ?>'">Editar</button>
-                                <button class="btn btn-danger btn-sm">Eliminar</button>
+                                <button class="btn btn-danger btn-sm" onclick="deleteProduct(<?php echo $products['id_producto'] ?>)">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -116,7 +116,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     </div>
 
     <!-- Delete Confirmation Modal -->
-    <div class="modal" id="deleteModal">
+    <div class="modal " id="deleteModal">
         <div class="modal-content">
             <div class="modal-header">
                 <h3>Confirmar Eliminación</h3>
@@ -138,5 +138,17 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     <div class="alert alert-danger">Error al eliminar el producto</div>
     <div class="alert alert-warning">Producto actualizado correctamente</div>
     -->
+
+    <script>
+        const deleteModal = document.getElementById('deleteModal');
+        function deleteProduct(id) {
+            fetch("eliminatedProduct.php?id=" + id)
+            .then(res => res.json())
+            .then(data => {
+                deleteModal.classList.add('active');
+            })
+            .catch(err => console.error(err));
+        }
+    </script>
 </body>
 </html>
