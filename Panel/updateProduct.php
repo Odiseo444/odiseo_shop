@@ -86,7 +86,7 @@ $product = mysqli_fetch_array($obtenerConsulta);
                             <strong>Haz clic aquí o arrastra la imagen principal</strong>
                             <br><small>Formatos: JPG, PNG, GIF - Máximo 5MB</small>
                         </label>
-                        <input type="file" id="mainImg" name="imagen" class="file-input" accept="image/*" required>
+                        <input type="file" id="mainImg" name="imagen" class="file-input" accept="image/*">
                     </div>
                     <div class="image-preview-container" id="mainImagePreview">
                         <?php echo "<img src='data:image/jpeg;base64,". $product['imagen'] . "' class='image-preview' alt=''>" ?>
@@ -140,13 +140,11 @@ $product = mysqli_fetch_array($obtenerConsulta);
 document.getElementById('productCategory').addEventListener('change', function() {
     let categoriaId = this.value;
 
-    // Si no hay categoría seleccionada, vacía el select
     if(categoriaId === ""){
         document.getElementById('productSubCategory').innerHTML = "<option value=''>-- Selecciona Subcategoría --</option>";
         return;
     }
 
-    // Hacemos petición AJAX a PHP
     fetch("get_subcategories.php?categoria_id=" + categoriaId)
         .then(res => res.json())
         .then(data => {

@@ -96,27 +96,118 @@ body {
 }
 
 /* Productos */
-.product-section {
-  padding: 20px;
-  text-align: center;
+/* Estilo general para la sección */
+section.py-5.bg-light {
+  padding: 50px 0;
+  background-color: #f8f9fa;
 }
 
-.product-grid {
+/* Contenedor principal */
+.container.text-center {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Título principal */
+h3.mb-4 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #333;
+  margin-bottom: 40px;
+}
+
+/* Estilo para la fila de productos */
+.row.row-cols-1.row-cols-md-3.g-4 {
   display: flex;
-  justify-content: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Contenedor de cada producto */
+.producto-container {
+  display: flex;
   flex-wrap: wrap;
   gap: 20px;
+  justify-content: center;
 }
 
-.product-card {
-  border: 1px solid #ccc;
-  padding: 10px;
-  width: 200px;
+/* Tarjeta de producto */
+.producto-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  transition: transform 0.3s ease-in-out;
+  max-width: 100%;
 }
 
-.product-card img {
+/* Efecto de hover en la tarjeta */
+.producto-card:hover {
+  transform: translateY(-10px);
+}
+
+/* Imagen del producto */
+.producto-imagen {
   width: 100%;
+  height: 250px;
+  object-fit: cover;
+  border-bottom: 1px solid #eee;
 }
+
+/* Detalles del producto */
+.producto-detalles {
+  padding: 20px;
+}
+
+/* Nombre del producto */
+.producto-nombre {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 15px;
+}
+
+/* Descripción del producto */
+.producto-descripcion {
+  font-size: 1rem;
+  color: #555;
+  margin-bottom: 15px;
+  line-height: 1.5;
+}
+
+/* Marca del producto */
+.producto-marca {
+  font-size: 0.9rem;
+  color: #777;
+  margin-bottom: 10px;
+}
+
+/* Precio del producto */
+.producto-precio {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #e74c3c;
+  margin-bottom: 20px;
+}
+
+/* Botón agregar al carrito */
+.btn-agregar {
+  background-color: #3498db;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+/* Efecto hover del botón */
+.btn-agregar:hover {
+  background-color: #2980b9;
+}
+
+
 
 /* Footer */
 .footer {

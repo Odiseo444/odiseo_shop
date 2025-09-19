@@ -47,6 +47,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
         <div class="header">
             <h1>Panel de Administración</h1>
             <p>Gestiona los productos de tu tienda online de forma sencilla y eficiente</p>
+            <a href="../index.php" style="color: white;">Atras</a>
         </div>
 
         <!-- Statistics -->
@@ -102,7 +103,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
                             <p class="product-description"><?php echo $products['descripcion'] ?></p>
                             <div class="product-actions">
                                 <button class="btn btn-warning btn-sm" onclick="window.location.href = 'updateProduct.php?id=<?php echo $products['id_producto'] ?>'">Editar</button>
-                                <button class="btn btn-danger btn-sm" onclick="deleteProduct(<?php echo $products['id_producto'] ?>)">Eliminar</button>
+                                <button class="btn btn-danger btn-sm" onclick="showModal(<?php echo $products['id_producto'] ?>)">Eliminar</button>
                             </div>
                         </div>
                     </div>
@@ -123,11 +124,9 @@ $hacerConsulta = mysqli_query($conexion, $sql);
             </div>
             <p>¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</p>
             <div class="modal-actions">
-                <form method="POST" action="" style="display: inline;">
                     <input type="hidden" name="productId" value="">
-                    <button type="submit" class="btn btn-danger" name="deleteProduct">Eliminar</button>
-                </form>
-                <button class="btn btn-primary">Cancelar</button>
+                    <button type="submit" class="btn btn-danger" name="deleteProduct" id="delete">Eliminar</button>
+                <button class="btn btn-primary" onclick="showModal()">Cancelar</button>
             </div>
         </div>
     </div>
@@ -141,11 +140,18 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 
     <script>
         const deleteModal = document.getElementById('deleteModal');
+        const eliminatedProduct = document.getElementById('delete');
+        function showModal(id) {
+            deleteModal.classList.toggle('active');
+            if (id) {
+                eliminatedProduct.setAttribute('onclick', ' deleteProduct(' + id + ')');
+            }
+        }
         function deleteProduct(id) {
             fetch("eliminatedProduct.php?id=" + id)
             .then(res => res.json())
             .then(data => {
-                deleteModal.classList.add('active');
+                window.location = 'panel.php'
             })
             .catch(err => console.error(err));
         }
