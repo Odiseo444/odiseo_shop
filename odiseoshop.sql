@@ -58,7 +58,7 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `descripcion` text DEFAULT NULL,
   `precio` decimal(10,2) NOT NULL,
   `stock` int(11) DEFAULT 0,
-  `imagen` varchar(255) DEFAULT NULL,
+  `imagen` longtext DEFAULT NULL,
   `imagenes` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin DEFAULT NULL CHECK (json_valid(`imagenes`)),
   `marca` varchar(100) DEFAULT NULL,
   `id_categoria` int(11) DEFAULT NULL,
