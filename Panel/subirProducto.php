@@ -1,6 +1,6 @@
 <?php
 $name = $_POST['nombre'] ?? '';
-$descr = $_POST['descripcion'] ?? '';
+$descr = htmlspecialchars($_POST['descripcion']) ?? '';
 $precio = $_POST['precio'] ?? '';
 $stock = $_POST['stock'] ?? '';
 $imagenBaseCode64 = base64_encode(file_get_contents($_FILES['imagen']['tmp_name'])) ?? '';
