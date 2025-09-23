@@ -4,7 +4,8 @@ $name = $_POST['nombre'] ?? '';
 $descr = $_POST['descripcion'] ?? '';
 $precio = $_POST['precio'] ?? '';
 $stock = $_POST['stock'] ?? '';
-// $imagenesInput = $_FILES['imagenes'];
+$imagenBaseCode64 = $_FILES['imagen']['tmp_name'] ?? '';
+// $imagenesInput = $_FILES['imagenes'] ?? '';
 // $imagenes = [];
 $marca = $_POST['marca'] ?? '';
 $categoria = $_POST['categoria'] ?? '';
@@ -22,14 +23,24 @@ if ($name == '' || $descr == '' || $precio == '' || $stock == '' || $marca == ''
     exit();
 }
 
-echo $id;
 
 if ($id == '') {
         header('location:updateProducto.php?log=Ocurrio un error.');
         exit();
     }
-    $sql = "UPDATE `productos` SET `nombre`='$name',`descripcion`='$descr',`precio`='$precio',`stock`='$stock',`marca`='$marca',`id_categoria`='$categoria',`id_subcategoria`='$subcategoria',`ultima_actualizacion`='$fechaact' WHERE id_producto='$id'";
-    $hacerConsulta = mysqli_query($conexion, $sql);
 
-    header('location:panel.php');
+     if ($imagenBaseCode64 == '') {
+            $sql = "UPDATE `productos` SET `nombre`='$name',`descripcion`='$descr',`precio`='$precio',`stock`='$stock',`marca`='$marca',`id_categoria`='$categoria',`id_subcategoria`='$subcategoria',`ultima_actualizacion`='$fechaact' WHERE id_producto='$id'";
+            $hacerConsulta = mysqli_query($conexion, $sql);
+            header('location:panel.php');
+            exit;
+        } else {
+            $imagenBaseCode64 = base64_encode(file_get_contents($_FILES['imagen']['tmp_name'])) ?? '';
+            $sql = "UPDATE `productos` SET `nombre`='$name',`descripcion`='$descr',`precio`='$precio',`stock`='$stock', `imagen`='$imagenBaseCode64' ,`marca`='$marca',`id_categoria`='$categoria',`id_subcategoria`='$subcategoria',`ultima_actualizacion`='$fechaact' WHERE id_producto='$id'";
+            $hacerConsulta = mysqli_query($conexion, $sql);
+            echo 'holaa';
+            header('location:panel.php');
+        }
+    
+
 ?>

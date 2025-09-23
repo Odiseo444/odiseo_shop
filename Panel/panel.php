@@ -53,7 +53,12 @@ $hacerConsulta = mysqli_query($conexion, $sql);
         <!-- Statistics -->
         <div class="stats-container">
             <div class="stat-card">
-                <div class="stat-number">0</div>
+            <?php 
+            $totalStock = 0;
+            while ($products = mysqli_fetch_array($hacerConsulta)) { 
+                $totalStock += 1;
+                }?>
+                <div class="stat-number"><?php echo $totalStock; ?></div>
                 <div class="stat-label">Productos Totales</div>
             </div>
             <div class="stat-card">

@@ -107,7 +107,7 @@ $product = mysqli_fetch_array($obtenerConsulta);
                 </div> -->
                 
                 <div class="form-group">
-                    <button type="submit" class="btn btn-success" name="addProduct">Agregar Producto</button>
+                    <button type="submit" class="btn btn-success" name="addProduct">Actualizar Producto</button>
                     <button type="button" class="btn btn-danger" onclick="window.location.replace('panel.php')">Cancelar</button>
                 </div>
             </form>
