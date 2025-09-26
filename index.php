@@ -1,6 +1,4 @@
-<?php
-session_start();
-
+<?php session_start();
 $id = $_SESSION['id'] ?? '';
 include_once 'inc\database.php';
 if (!($id == '')) {
@@ -9,134 +7,135 @@ if (!($id == '')) {
   $user = mysqli_fetch_array($doConsult);
 }
 $sql = 'SELECT * FROM productos';
-$hacerConsulta = mysqli_query($conexion, $sql);
-?>
+$hacerConsulta = mysqli_query($conexion, $sql); ?>
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Odiseo Shop | Moda Masculina</title>
-    <link href="css/css/bootstrap.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="css\style.css">
-    <script src="css/js/bootstrap.bundle.min.js"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anton&amp;display=swap">
-  </head>
-  <body>
 
-<header class="navbar">
-  <div class="header-left">
-    <a href="Account/account.php?id=<?php echo $id ?>"><span class="material-symbols-outlined">account_circle</span></a>
-    <div class="logo">ODISEO SHOP</div>
-  </div>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Odiseo Shop | Moda Masculina</title>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+
+  <header class="navbar">
+    <div class="header-left">
+      <a href="Account/account.php"><span class="material-symbols-outlined">account_circle</span></a>
+      <div class="logo">ODISEO SHOP</div>
+    </div>
     <nav class="nav-links">
       <a href="#">Inicio</a>
-      <a href="#">Tienda</a>
+      <a href="shop.php">Tienda</a>
       <a href="#">Ofertas</a>
       <a href="#">Contacto</a>
-      <?php if (isset($user)) if ($user['rol'] === '0') {echo '<a href="Panel/panel.php">Panel de productos</a>'; } ?>
+      <?php if (isset($user)) if ($user['rol'] === '0') {
+          echo '<a href="Panel/panel.php">Panel de productos</a>';
+        } ?>
     </nav>
   </header>
 
-  <!-- Hero Banner -->
-    <div id="carouselExampleCaptions" class="carousel slide">
-  <div class="carousel-indicators">
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
-    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
-  </div>
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <img src="img\plantilla-banner-moda-urbana_23-2148652497.jpg" class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+  <div class="main-container">
+    <!-- Hero Banner -->
+    <div id="carouselExampleCaptions" class="carousel slide" data-bs-ride="carousel">
+      <div class="carousel-indicators">
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
+        <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
       </div>
-    </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+      <div class="carousel-inner">
+        <div class="carousel-item active">
+          <img src="https://via.placeholder.com/1200x400/333/fff?text=Moda+Urbana" class="d-block w-100" alt="Moda Urbana">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Nueva Colección</h5>
+            <p>Descubre las últimas tendencias en moda masculina</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="https://via.placeholder.com/1200x400/666/fff?text=Ofertas+Especiales" class="d-block w-100" alt="Ofertas">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Ofertas Especiales</h5>
+            <p>Hasta 50% de descuento en productos seleccionados</p>
+          </div>
+        </div>
+        <div class="carousel-item">
+          <img src="https://via.placeholder.com/1200x400/999/fff?text=Calidad+Premium" class="d-block w-100" alt="Calidad">
+          <div class="carousel-caption d-none d-md-block">
+            <h5>Calidad Premium</h5>
+            <p>Los mejores materiales para el hombre moderno</p>
+          </div>
+        </div>
       </div>
+      <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Previous</span>
+      </button>
+      <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="visually-hidden">Next</span>
+      </button>
     </div>
-    <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
-      <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
-      </div>
-    </div>
-  </div>
-  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Previous</span>
-  </button>
-  <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="visually-hidden">Next</span>
-  </button>
-</div>
 
-<!-- CARRUSEL -->
-
-<!-- PRODUCTOS DESTACADOS -->
-<section class="py-5 bg-light">
-  <div class="container text-center">
-    <h3 class="mb-4">Productos Destacados</h3>
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-      
+    <!-- PRODUCTOS DESTACADOS -->
+    <section class="productos-section">
+      <h3>Productos Destacados</h3>
       <div class="producto-container">
+        <!-- Ejemplo de productos (reemplaza con tu código PHP) -->
+        <?php 
+        $count = 0;
+        while ($products = mysqli_fetch_array($hacerConsulta)) { ?>
+        <div class="col-md-4">
+          <div class="product-card">
+            <div class="product-content">
+              <img src="data:image/jpeg;base64,<?php echo $products['imagen'] ?>" alt="<?php echo $products['nombre'] ?>" class="product-main-image">
+              <div class="product-details">
+                <div class="product-info">
+                  <h3><?php echo $products['nombre'] ?></h3>
+                  <p class="product-description"><?php echo $products['descripcion'] ?></p>
+                  <p><strong>Marca:</strong> <?php echo $products['marca'] ?></p>
+                </div>
+                <div class="product-price">$<?php echo $products['precio'] ?></div>
+                <div class="product-actions">
+                  <button class="btn btn-success">Agregar al carrito</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
       <?php 
-      while ($products = mysqli_fetch_array($hacerConsulta)) {
-        ?>
-        <div class="producto-card">
-        <img src="data:image/jpeg;base64,<?php echo $products['imagen'] ?>" alt="Nombre del Producto" class="producto-imagen">
-        <div class="producto-detalles">
-            <h2 class="producto-nombre"><?php echo $products['nombre'] ?></h2>
-            <p class="producto-descripcion"><?php echo $products['descripcion'] ?></p>
-            <p class="producto-marca">Marca: <strong><?php echo $products['marca'] ?></strong></p>
-            <p class="producto-precio"><?php echo $products['precio'] ?></p>
-            <button class="btn-agregar">Agregar al carrito</button>
-          </div>
-          </div>
-          <?php
+      $count += 1;
+      if ($count == 3) {
+        exit;
       }
-      ?>
-      </div>
-      </div>
-      </div>
-</section>
+    } ?>
+    </section>
 
-<!-- CTA -->
-<section class="py-5 text-white text-center" style="background-color: #333;">
-  <div class="container">
-    <h2>Suscríbete a nuestro boletín</h2>
-    <p class="mb-4">Recibe ofertas exclusivas y las últimas tendencias</p>
-    <form class="row justify-content-center">
-      <div class="col-md-4">
-        <input type="email" class="form-control" placeholder="Tu correo electrónico">
-      </div>
-      <div class="col-auto">
-        <button class="btn btn-primary">Suscribirme</button>
-      </div>
-    </form>
+    <!-- CTA -->
+    <section class="cta-section">
+      <h2>Suscríbete a nuestro boletín</h2>
+      <p>Recibe ofertas exclusivas y las últimas tendencias</p>
+      <form class="cta-form">
+        <input type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit" class="cta-btn">Suscribirme</button>
+      </form>
+    </section>
   </div>
-</section>
 
-<!-- FOOTER -->
-<footer class="bg-dark text-white py-4">
-  <div class="container text-center">
-    <p>&copy; 2025 RopaHombre. Todos los derechos reservados.</p>
+  <!-- FOOTER -->
+  <footer class="footer">
+    <p>&copy; 2025 Odiseo Shop. Todos los derechos reservados.</p>
     <div>
-      <a href="#" class="text-white me-3"><i class="fab fa-facebook-f"></i></a>
-      <a href="#" class="text-white me-3"><i class="fab fa-instagram"></i></a>
-      <a href="#" class="text-white"><i class="fab fa-twitter"></i></a>
+      <a href="#"><i class="fab fa-facebook-f">📘</i></a>
+      <a href="#"><i class="fab fa-instagram">📷</i></a>
+      <a href="#"><i class="fab fa-twitter">🐦</i></a>
     </div>
-  </div>
-</footer>
-</body>
-</html>
+  </footer>
 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+</body>
+
+</html>
