@@ -600,13 +600,13 @@
         <section class="story-section fade-in">
             <h2 class="section-title">¿Quiénes Somos?</h2>
             <p class="story-text">
-                <strong>Odiseo Shop</strong> nació en 2020 con una visión clara: revolucionar la forma en que los hombres experimentan la moda. Inspirados en la odisea épica de Homero, entendemos que cada hombre está en su propio viaje de autodescubrimiento y expresión personal.
+                <strong>Odiseo Shop</strong> nació en 2020 con una visión clara: revolucionar la forma en que los hombres experimentan la moda. Inspirados en el estilo overzice, entendemos que cada hombre está en su propio viaje de autodescubrimiento y expresión personal.
             </p>
             <p class="story-text">
                 Comenzamos como una pequeña tienda en línea con apenas 50 productos. Hoy, somos una referencia en moda masculina premium, atendiendo a miles de clientes en todo el país. Nuestra misión es simple pero poderosa: <strong>ofrecer estilo, calidad y confianza en cada prenda.</strong>
             </p>
             <p class="story-text">
-                Cada pieza en nuestro catálogo es cuidadosamente seleccionada por nuestro equipo de expertos en moda. Trabajamos directamente con diseñadores y fabricantes que comparten nuestros valores de sostenibilidad, calidad artesanal y diseño innovador.
+                 Cada pieza en nuestro catálogo es cuidadosamente seleccionada por nuestro equipo de expertos en moda. Trabajamos directamente con diseñadores y fabricantes que comparten nuestros valores de sostenibilidad, calidad artesanal y diseño innovador.
             </p>
         </section>
 
@@ -751,21 +751,21 @@
                 <div class="team-card">
                     <div class="team-image">👨‍💼</div>
                     <div class="team-info">
-                        <h3 class="team-name">Carlos Mendoza</h3>
+                        <h3 class="team-name">Roosevelt steven</h3>
                         <p class="team-role">CEO & Fundador</p>
                         <p class="team-bio">
-                            Visionario detrás de Odiseo Shop. Con 15 años de experiencia en moda masculina, transformó su pasión en un negocio exitoso.
+                            Visionario detrás de Odiseo Shop. Con 10 años de experiencia en moda masculina, transformó su pasión en un negocio exitoso.
                         </p>
                     </div>
                 </div>
 
                 <div class="team-card">
-                    <div class="team-image">👩‍💼</div>
+                    <div class="team-image">👨‍💼</div>
                     <div class="team-info">
-                        <h3 class="team-name">Ana Rodríguez</h3>
-                        <p class="team-role">Directora Creativa</p>
+                        <h3 class="team-name">Jose manuel</h3>
+                        <p class="team-role">CEO & Director Creativo</p>
                         <p class="team-bio">
-                            Experta en tendencias globales. Ana selecciona personalmente cada pieza de nuestro catálogo con un ojo experto para el estilo.
+                            Experto en tendencias globales. jose selecciona personalmente cada pieza de nuestro catálogo con un ojo experto para el estilo.
                         </p>
                     </div>
                 </div>
@@ -773,7 +773,7 @@
                 <div class="team-card">
                     <div class="team-image">👨‍💻</div>
                     <div class="team-info">
-                        <h3 class="team-name">Luis Torres</h3>
+                        <h3 class="team-name">Hector masa</h3>
                         <p class="team-role">Director de Operaciones</p>
                         <p class="team-bio">
                             Garantiza que cada pedido llegue a tiempo y en perfectas condiciones. Maestro de la logística y satisfacción del cliente.
@@ -784,10 +784,10 @@
                 <div class="team-card">
                     <div class="team-image">👩‍🎨</div>
                     <div class="team-info">
-                        <h3 class="team-name">María González</h3>
-                        <p class="team-role">Jefa de Marketing</p>
+                        <h3 class="team-name">yeimar garcia</h3>
+                        <p class="team-role">Marketing</p>
                         <p class="team-bio">
-                            Conecta nuestra marca con miles de clientes. Creativa, estratégica y apasionada por contar historias que inspiran.
+                            Conecta nuestra marca con miles de clientes. Creativo, estratégico y apasionado por contar historias que inspiran.
                         </p>
                     </div>
                 </div>
