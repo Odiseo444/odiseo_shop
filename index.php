@@ -47,27 +47,43 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-label="Slide 2"></button>
     <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-label="Slide 3"></button>
+    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-label="Slide 3"></button>
   </div>
   <div class="carousel-inner">
     <div class="carousel-item active">
-      <img src="img/1.jpg" class="d-block w-100" alt="...">
+      <img src="img/1.png" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>First slide label</h5>
-        <p>Some representative placeholder content for the first slide.</p>
+        <h5>BLACK FRIDAY</h5>
+        <p>Aprovecha y compre en black friday ara obtener descuentos.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="img/3.jpg" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Second slide label</h5>
-        <p>Some representative placeholder content for the second slide.</p>
+        <h5>BLACK FRIDAY</h5>
+        <p>Aprovecha y compre en black friday ara obtener descuentos.</p>
       </div>
     </div>
     <div class="carousel-item">
-      <img src="..." class="d-block w-100" alt="...">
+      <img src="img/3.png" class="d-block w-100" alt="...">
       <div class="carousel-caption d-none d-md-block">
-        <h5>Third slide label</h5>
-        <p>Some representative placeholder content for the third slide.</p>
+        <h5>ODISEO SHOP</h5>
+        <p>Tu esencia, tu estilo.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/4.png" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Paga en cuotas</h5>
+        <p>Variedad de pagos.</p>
+      </div>
+    </div>
+    <div class="carousel-item">
+      <img src="img/2.jpg" class="d-block w-100" alt="...">
+      <div class="carousel-caption d-none d-md-block">
+        <h5>Descuentos</h5>
+        <p>Consigue los mejores descuentos.</p>
       </div>
     </div>
   </div>
@@ -130,11 +146,19 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
   <footer class="footer">
     <p>&copy; 2025 Odiseo Shop. Todos los derechos reservados.</p>
     <div>
-      <a href="#"<i class="bi bi-instagram"></i></a>
+      <a href="#"><i class="bi bi-instagram"></i></a>
     </div>
   </footer>
 
+ <!--  <div id="cart" class="cart">
+  <span class="material-symbols-outlined">shopping_cart</span>
+  </div> -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+  <script>
+    document.getElementById('cart').addEventListener('click', function() {
+      window.location.href = 'cart.php';
+    });
+  </script>
 </body>
 
 </html>

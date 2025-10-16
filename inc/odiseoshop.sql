@@ -1,11 +1,11 @@
-﻿-- phpMyAdmin SQL Dump
+-- phpMyAdmin SQL Dump
 -- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 15-09-2025 a las 21:24:55
+-- Tiempo de generación: 16-10-2025 a las 18:02:10
 -- Versión del servidor: 10.4.32-MariaDB
--- Versión de PHP: 8.2.12
+-- Versión de PHP: 8.0.30
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -26,16 +26,28 @@ USE `odiseoshop`;
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorias`
+-- Estructura de tabla para la tabla `carrito`
 --
 
-CREATE TABLE IF NOT EXISTS `categorias` (
+CREATE TABLE `carrito` (
+  `id` int(11) NOT NULL,
+  `id_usuario` int(11) NOT NULL,
+  `id_productos` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL CHECK (json_valid(`id_productos`))
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `categorias`
+--
+
+CREATE TABLE `categorias` (
   `id_categoria` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `categorias`
+-- Volcado de datos para la tabla `categorias`
 --
 
 INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
@@ -49,10 +61,10 @@ INSERT INTO `categorias` (`id_categoria`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `productos`
+-- Estructura de tabla para la tabla `productos`
 --
 
-CREATE TABLE IF NOT EXISTS `productos` (
+CREATE TABLE `productos` (
   `id_producto` int(11) NOT NULL,
   `nombre` varchar(150) NOT NULL,
   `descripcion` text DEFAULT NULL,
@@ -66,6 +78,10 @@ CREATE TABLE IF NOT EXISTS `productos` (
   `fecha_creacion` timestamp NOT NULL DEFAULT current_timestamp(),
   `ultima_actualizacion` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+--
+-- Volcado de datos para la tabla `productos`
+--
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stock`, `imagen`, `imagenes`, `marca`, `id_categoria`, `id_subcategoria`, `fecha_creacion`, `ultima_actualizacion`) VALUES
 (2, 'camiseta negra', 'Tres Camisetas básicas para hombre Oversize color negro en tela 100% algodón, cuello en tela RIB; más suave, elástico y con superficie acanalada. Modelo usa talla L. Se recomienda usar una talla menos en comparación a una talla convencional.  Prenda en promoción o descuento no cuenta con cambio por gusto o talla.', 70.00, 100, '/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDAAMCAgMCAgMDAwMEAwMEBQgFBQQEBQoHBwYIDAoMDAsKCwsNDhIQDQ4RDgsLEBYQERMUFRUVDA8XGBYUGBIUFRT/2wBDAQMEBAUEBQkFBQkUDQsNFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBQUFBT/wAARCAHhAZUDASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWl5iZmqKjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWVpjZGVmZ2hpanN0dXZ3eHl6goOEhYaHiImKkpOUlZaXmJmaoqOkpaanqKmqsrO0tba3uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD7zmdvNl+b+KjDf36Jf+PiX/eplWZD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/fow39+mUUAPw39+jDf36ZRQA/Df36MN/fplFAD8N/foplFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFFAD5f+PiX/eplPl/4+Jf96mUAFFFFABRRRQAUUUUAFFFFABRRRQAUUUUAFFFG9U+9QAUV458S/wBrf4W/CtXi1XxVbXl7822x0n/Spf8Ac+X5V/4G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', 'null', 'dynamo', 1, 4, '2025-09-23 19:51:42', '2025-09-23 20:19:51'),
@@ -128,17 +144,17 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `precio`, `stoc
 -- --------------------------------------------------------
 
 --
--- Table structure for table `subcategorias`
+-- Estructura de tabla para la tabla `subcategorias`
 --
 
-CREATE TABLE IF NOT EXISTS `subcategorias` (
+CREATE TABLE `subcategorias` (
   `id_subcategoria` int(11) NOT NULL,
   `id_categoria` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `subcategorias`
+-- Volcado de datos para la tabla `subcategorias`
 --
 
 INSERT INTO `subcategorias` (`id_subcategoria`, `id_categoria`, `nombre`) VALUES
@@ -197,10 +213,10 @@ INSERT INTO `subcategorias` (`id_subcategoria`, `id_categoria`, `nombre`) VALUES
 -- --------------------------------------------------------
 
 --
--- Table structure for table `usuarios`
+-- Estructura de tabla para la tabla `usuarios`
 --
 
-CREATE TABLE IF NOT EXISTS `usuarios` (
+CREATE TABLE `usuarios` (
   `id_usuario` int(11) NOT NULL,
   `nombre` varchar(100) NOT NULL,
   `apellido` varchar(100) NOT NULL,
@@ -214,24 +230,31 @@ CREATE TABLE IF NOT EXISTS `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
--- Dumping data for table `usuarios`
+-- Volcado de datos para la tabla `usuarios`
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `nombre`, `apellido`, `correo`, `clave`, `direccion_envio`, `telefono`, `fecha_registro`, `imagen_perfil`, `rol`) VALUES
 (1, 'Hector', 'Maza', 'manuelhmhd@gmail.com', '12345', 'cl 46n #4n 31', '3054780788', '2025-09-13 02:25:15', NULL, '0');
 
 --
--- Indexes for dumped tables
+-- Índices para tablas volcadas
 --
 
 --
--- Indexes for table `categorias`
+-- Indices de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_usuario` (`id_usuario`);
+
+--
+-- Indices de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   ADD PRIMARY KEY (`id_categoria`);
 
 --
--- Indexes for table `productos`
+-- Indices de la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD PRIMARY KEY (`id_producto`),
@@ -239,60 +262,72 @@ ALTER TABLE `productos`
   ADD KEY `id_subcategoria` (`id_subcategoria`);
 
 --
--- Indexes for table `subcategorias`
+-- Indices de la tabla `subcategorias`
 --
 ALTER TABLE `subcategorias`
   ADD PRIMARY KEY (`id_subcategoria`),
   ADD KEY `id_categoria` (`id_categoria`);
 
 --
--- Indexes for table `usuarios`
+-- Indices de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
   ADD UNIQUE KEY `correo` (`correo`);
 
 --
--- AUTO_INCREMENT for dumped tables
+-- AUTO_INCREMENT de las tablas volcadas
 --
 
 --
--- AUTO_INCREMENT for table `categorias`
+-- AUTO_INCREMENT de la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT de la tabla `categorias`
 --
 ALTER TABLE `categorias`
   MODIFY `id_categoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
--- AUTO_INCREMENT for table `productos`
+-- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_producto` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
--- AUTO_INCREMENT for table `subcategorias`
+-- AUTO_INCREMENT de la tabla `subcategorias`
 --
 ALTER TABLE `subcategorias`
   MODIFY `id_subcategoria` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=52;
 
 --
--- AUTO_INCREMENT for table `usuarios`
+-- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
   MODIFY `id_usuario` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
--- Constraints for dumped tables
+-- Restricciones para tablas volcadas
 --
 
 --
--- Constraints for table `productos`
+-- Filtros para la tabla `carrito`
+--
+ALTER TABLE `carrito`
+  ADD CONSTRAINT `carrito_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`);
+
+--
+-- Filtros para la tabla `productos`
 --
 ALTER TABLE `productos`
   ADD CONSTRAINT `productos_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE SET NULL ON UPDATE CASCADE,
   ADD CONSTRAINT `productos_ibfk_2` FOREIGN KEY (`id_subcategoria`) REFERENCES `subcategorias` (`id_subcategoria`) ON DELETE SET NULL ON UPDATE CASCADE;
 
 --
--- Constraints for table `subcategorias`
+-- Filtros para la tabla `subcategorias`
 --
 ALTER TABLE `subcategorias`
   ADD CONSTRAINT `subcategorias_ibfk_1` FOREIGN KEY (`id_categoria`) REFERENCES `categorias` (`id_categoria`) ON DELETE CASCADE ON UPDATE CASCADE;

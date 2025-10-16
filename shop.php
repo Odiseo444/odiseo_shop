@@ -113,7 +113,7 @@ $doConsulta =  mysqli_query($conexion, $consulta);
 
         <div class="products-grid" id="productsGrid">
             <?php while ($products = mysqli_fetch_array($hacerConsulta)) { ?>
-            <div class="product-card" data-category="<?php echo $products['categoria'] ?>" data-price="<?php echo $products['precio'] ?>">
+            <div class="product-card" data-category="<?php echo $products['categoria'] ?>" data-price="<?php echo $products['precio'] ?>" data-id='<?php echo $products['id_producto'] ?>'>
                 <div class="product-image-container">
                     <img src="data:image/jpeg;base64,<?php echo $products['imagen'] ?>" class="product-image">
                     <div class="product-badges">
@@ -136,6 +136,7 @@ $doConsulta =  mysqli_query($conexion, $consulta);
                     <button class="btn-add-cart" onclick="addToCart(this)">Agregar al carrito</button>
                 </div>
               </div>
+              
               <?php } ?>
             
         </div>
@@ -245,8 +246,23 @@ $doConsulta =  mysqli_query($conexion, $consulta);
                 toast: true,
                 position: 'top-end'
             });
+
+            fetch('add_to_cart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productId: card.dataset.id })
+            })
         }
-      
+      const productCard = document.querySelectorAll('.product-card');
+
+        productCard.forEach(card => {
+            card.addEventListener('click', () => {
+            const productId = card.getAttribute('data-id');
+            window.location.href = 'producto.php?idPro=' + productId;
+            });
+        });
     </script>
 </body>
 </html>
