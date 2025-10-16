@@ -17,8 +17,9 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
   <title>Odiseo Shop | Moda Masculina</title>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
-  <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
   <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 </head>
 
 <body>
@@ -31,7 +32,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
     <nav class="nav-links">
       <a href="#">Inicio</a>
       <a href="shop.php">Tienda</a>
-      <a href="#">Ofertas</a>
+      <a href="nosotros.php">Nosotros</a>
       <a href="#">Contacto</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
           echo '<a href="Panel/panel.php">Panel de productos</a>';
@@ -109,7 +110,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
       <?php 
       $count += 1;
       if ($count == 3) {
-        exit;
+        break;
       }
     } ?>
     </section>
@@ -129,13 +130,11 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
   <footer class="footer">
     <p>&copy; 2025 Odiseo Shop. Todos los derechos reservados.</p>
     <div>
-      <a href="#"><i class="fab fa-facebook-f">📘</i></a>
-      <a href="#"><i class="fab fa-instagram">📷</i></a>
-      <a href="#"><i class="fab fa-twitter">🐦</i></a>
+      <a href="#"<i class="bi bi-instagram"></i></a>
     </div>
   </footer>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -53,20 +53,15 @@ $hacerConsulta = mysqli_query($conexion, $sql);
         <!-- Statistics -->
         <div class="stats-container">
             <div class="stat-card">
-            <?php 
-            $totalStock = 0;
-           /* while ($products = mysqli_fetch_array($hacerConsulta)) { 
-                $totalStock += 1;
-                } */?>
-                <div class="stat-number"><?php echo $totalStock; ?></div>
-                <div class="stat-label">Productos Totales</div>
+                <div class="stat-number" id='totalProducts'>0</div>
+                <div class="stat-label" >Productos Totales</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">0</div>
-                <div class="stat-label">Stock Bajo</div>
+                <div class="stat-number" id='lowStock'>0</div>
+                <div class="stat-label" >Stock Bajo</div>
             </div>
             <div class="stat-card">
-                <div class="stat-number">$0</div>
+                <div class="stat-number" id='priceProm'>$0</div>
                 <div class="stat-label">Precio Promedio</div>
             </div>
         </div>
@@ -144,6 +139,11 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     -->
 
     <script>
+        const searchBox = document.querySelector('.search-box');
+        const productCards = document.querySelectorAll('.product-card');
+        const totalProducts = document.getElementById('totalProducts');
+        const lowStock = document.getElementById('lowStock');
+        const priceProm = document.getElementById('priceProm');
         const deleteModal = document.getElementById('deleteModal');
         const eliminatedProduct = document.getElementById('delete');
         function showModal(id) {
@@ -160,6 +160,51 @@ $hacerConsulta = mysqli_query($conexion, $sql);
             })
             .catch(err => console.error(err));
         }
+
+        searchBox.addEventListener('input', () => {
+            const query = searchBox.value.toLowerCase();
+            productCards.forEach(card => {
+                const productName = card.querySelector('h3').textContent.toLowerCase();
+                if (productName.includes(query)) {
+                    card.style.display = '';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        productCards.forEach(card => {
+            const stock = parseInt(card.querySelector('.product-stock').textContent);
+            if (stock < 5) {
+                card.querySelector('.product-stock').classList.remove('stock-high');
+                card.querySelector('.product-stock').classList.add('stock-low');
+            }
+        });
+
+        productCards.length > 0 ? totalProducts.textContent = productCards.length : totalProducts.textContent = '0';
+        let moreLowStock;
+        let count = 0;
+        productCards.forEach(card => {
+            let lowStockCount = card.querySelector('.product-stock').textContent;
+            if (count == 0) {
+                moreLowStock = parseInt(lowStockCount);
+            }
+
+            if (count > 0) {
+                if (moreLowStock > parseInt(lowStockCount)) {
+                    moreLowStock = parseInt(lowStockCount);
+                }
+            }
+            count += 1;
+            lowStock.textContent = moreLowStock;
+        });
+        let totalPrice = 0;
+        productCards.forEach(card => {
+            let price = card.querySelector('.product-price').textContent;
+            totalPrice += parseFloat(price.replace('$', ''));
+            count += 1;
+            priceProm.textContent = '$' + (totalPrice / count).toFixed(2);
+        });
     </script>
 </body>
 </html>
