@@ -133,7 +133,7 @@ $doConsulta =  mysqli_query($conexion, $consulta);
                             <span>(24)</span>
                         </div>
                     </div>
-                    <button class="btn-add-cart" onclick="addToCart(this)">Agregar al carrito</button>
+                    <button class="btn-add-cart">Ver</button>
                 </div>
               </div>
               
@@ -232,29 +232,6 @@ $doConsulta =  mysqli_query($conexion, $consulta);
             cards.forEach(card => grid.appendChild(card));
         });
 
-        // Agregar al carrito
-        function addToCart(btn) {
-            const card = btn.closest('.product-card');
-            const title = card.querySelector('.product-title').textContent;
-            
-            Swal.fire({
-                icon: 'success',
-                title: '¡Agregado!',
-                text: title + ' fue agregado al carrito',
-                showConfirmButton: false,
-                timer: 1500,
-                toast: true,
-                position: 'top-end'
-            });
-
-            fetch('add_to_cart.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ productId: card.dataset.id })
-            })
-        }
       const productCard = document.querySelectorAll('.product-card');
 
         productCard.forEach(card => {

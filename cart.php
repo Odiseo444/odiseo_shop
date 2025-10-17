@@ -1,3 +1,14 @@
+<?php
+$id = $_SESSION['id'] ?? '';
+include_once 'inc\database.php';
+if (!($id == '')) {
+  $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
+  $doConsult = mysqli_query($conexion, $consult);
+  $user = mysqli_fetch_array($doConsult);
+}
+$sql = 'SELECT cr.id_producto, p.nombre, p.precio, cr.cantidad, p.imagen FROM carrito cr JOIN productos p ON cr.id_producto = p.id_producto WHERE cr.id_usuario = ' . intval($id);
+$hacerConsulta = mysqli_query($conexion, $sql);
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -25,11 +36,11 @@
   <main class="carrito-container">
     <!-- Productos -->
     <div class="carrito-items">
-
+      <?php while ($item = mysqli_fetch_array($hacerConsulta)) { ?>
       <div class="carrito-item">
-        <img src="https://via.placeholder.com/100" alt="Producto">
+        <img src="data:image/jpg;base,<?php echo $item['imagen'] ?>" alt="Producto">
         <div class="carrito-detalles">
-          <h3>Camiseta Negra Premium</h3>
+          <h3><?php $item['nombre'] ?></h3>
           <p>Talla M</p>
         </div>
         <div class="carrito-controles">
@@ -42,25 +53,9 @@
           <button class="btn-eliminar">Eliminar</button>
         </div>
       </div>
-
-      <div class="carrito-item">
-        <img src="https://via.placeholder.com/100" alt="Producto">
-        <div class="carrito-detalles">
-          <h3>Pantalón Cargo</h3>
-          <p>Talla 32</p>
-        </div>
-        <div class="carrito-controles">
-          <div class="cantidad">
-            <button>-</button>
-            <input type="text" value="2">
-            <button>+</button>
-          </div>
-          <div class="precio">$120.000</div>
-          <button class="btn-eliminar">Eliminar</button>
-        </div>
-      </div>
-
+      <?php } ?>
     </div>
+      
 
     <!-- Resumen -->
     <div class="resumen">

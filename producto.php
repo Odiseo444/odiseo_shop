@@ -103,58 +103,52 @@ $producto = mysqli_fetch_array($hacerConsulta);
 
             <!-- Información del producto -->
             <div class="product-info">
-                <h1><?php echo $producto['nombre']; ?></h1>
+                <h1 data-id="<?php echo $idProducto; ?>"><?php echo $producto['nombre']; ?></h1>
                 <p class="price">$<?php echo number_format($producto['precio'], 2); ?></p>
                 <p class="stock">Stock disponible: <?php echo $producto['stock']; ?></p>
                 <p class="description"><?php echo $producto['descripcion']; ?></p>
                 <p class="category">Categoría: <?php echo $producto['categoria']; ?> / <?php echo $producto['subcategoria']; ?></p>
 
                 <!-- Botón de añadir al carrito -->
-                <form method="post" action="producto.php?idPro=<?php echo $idProducto; ?>">
                     <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
                     <input type="number" name="cantidad" value="1" min="1" max="<?php echo $producto['stock']; ?>">
-                    <button type="submit" name="add_cart" class="add-cart-btn">Agregar al carrito</button>
-                </form>
+                    <button type="submit" name="add_cart" class="add-cart-btn" onclick="addToCart()" >Agregar al carrito</button>
             </div>
         </div>
     </div>
 
-<?php
-// --- Agregar al carrito (usa sesión) ---
-if (isset($_POST['add_cart'])) {
-    $idP = $_POST['id_producto'];
-    $cantidad = max(1, intval($_POST['cantidad']));
 
-    if (!isset($_SESSION['carrito'])) {
-        $_SESSION['carrito'] = [];
-    }
-
-    // Si ya existe en el carrito, aumentar cantidad
-    if (isset($_SESSION['carrito'][$idP])) {
-        $_SESSION['carrito'][$idP]['cantidad'] += $cantidad;
-    } else {
-        $_SESSION['carrito'][$idP] = [
-            'nombre' => $producto['nombre'],
-            'precio' => $producto['precio'],
-            'cantidad' => $cantidad,
-            'imagen' => $producto['imagen']
-        ];
-    }
-
-    echo "<script>
-        Swal.fire({
-            title: '¡Producto añadido!',
-            text: 'El producto se ha añadido a tu carrito.',
-            icon: 'success',
-            confirmButtonText: 'OK'
-        }).then(() => {
-            window.location.href = 'producto.php?idPro=$idProducto';
-        });
-    </script>";
-}
 ?>
 
     <script>
+        function addToCart() {
+            const card = document.querySelector('.product-info h1').getAttribute('data-id');
+            const title = document.querySelector('.product-info h1').textContent;
+            Swal.fire({
+                icon: 'success',
+                title: '¡Agregado!',
+                text: title + ' fue agregado al carrito',
+                showConfirmButton: false,
+                timer: 2500,
+                toast: true,
+                position: 'top-end'
+            });
+
+            fetch('add_to_cart.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ productId: card, cantidad: 1 })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    console.log(data);})
+                .catch(error => {
+                    console.error('Error:', error);
+                })
+        };
+
     // Cambiar imagen principal
     function changeImage(element, imageUrl) {
         document.querySelector('.main-image-container img').src = imageUrl;

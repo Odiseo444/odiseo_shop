@@ -60,7 +60,7 @@ if (isset($_GET['log'])) {
                     </div>
                     <div class="stat-item">
                         <span class="stat-number">★★★★★</span>
-                        <span class="stat-label">Usuario VIP</span>
+                        <span class="stat-label"><?php if ($user['rol'] == 0) { echo 'USUARIO VIP'; } else { echo 'USUARIO'; } ?></span>
                     </div>
                 </div>
             </div>
