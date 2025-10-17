@@ -9,9 +9,12 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 while ($user = mysqli_fetch_array($hacerConsulta)) {
     if ($user['correo'] === $correo && $user['clave'] === $clave) {
         $_SESSION['id'] = $user['id_usuario'];
-            header("location:../index.php");
+           header("location:../index.php");
+          echo 'bien';
+          break;
         } else {
-            header('location:user.php?err=Credenciales incorrectas');
+           header('location:user.php?err=Credenciales incorrectas');
+            echo 'malllll';
         }
     }
 ?>
