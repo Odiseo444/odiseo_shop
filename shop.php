@@ -25,6 +25,9 @@ INNER JOIN subcategorias s ON p.id_subcategoria = s.id_subcategoria;';
 $hacerConsulta = mysqli_query($conexion, $sql);
 $consulta = 'SELECT * FROM categorias';
 $doConsulta =  mysqli_query($conexion, $consulta);
+
+$sqlConsult = 'SELECT * FROM categorias';
+$consultSql = mysqli_query($conexion, $sqlConsult);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -76,11 +79,10 @@ $doConsulta =  mysqli_query($conexion, $consulta);
                 <div class="filter-group">
                     <label>Categoría:</label>
                     <select class="filter-select" id="categoryFilter">
-                        <option value="">Todas</option>
-                        <option value="camisas">Camisas</option>
-                        <option value="pantalones">Pantalones</option>
-                        <option value="chaquetas">Chaquetas</option>
-                        <option value="zapatos">Zapatos</option>
+                        <option value="" selected>Selecciona una categoria</option>
+                    <?php while ($categ = mysqli_fetch_array($consultSql)) { ?>
+                        <option value="<?php echo $categ['nombre'] ?>"><?php echo $categ['nombre'] ?></option>
+                    <?php } ?>
                     </select>
                 </div>
                 
@@ -126,7 +128,7 @@ $doConsulta =  mysqli_query($conexion, $consulta);
                     <p class="product-description"><?php echo $products['descripcion'] ?></p>
                     <div class="product-price-section">
                         <div>
-                            <span class="current-price"><?php echo $products['precio'] ?></span>
+                            <span class="current-price">$<?php echo number_format($products['precio'], 0, ',', '.') ?> COP</span>
                         </div>
                         <div class="product-rating">
                             <span class="stars">★★★★★</span>
@@ -197,7 +199,11 @@ $doConsulta =  mysqli_query($conexion, $consulta);
                 card.style.display = show ? 'block' : 'none';
                 if (show) count++;
               });
-              if (count == 0) document.querySelector('.products-grid').innerHTML += '<p>No existe un producto con esas características</p>';
+              if (count == 0) {
+                document.querySelector('.products-grid').innerHTML += '<p class="text-no">No existe un producto con esas características</p>';
+            } else {
+                document.querySelector('.text-no    ').remove();
+            }
 
             document.getElementById('resultsCount').textContent = count;
         }
