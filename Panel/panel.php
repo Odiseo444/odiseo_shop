@@ -153,6 +153,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
             }
         }
         function deleteProduct(id) {
+            
             fetch("eliminatedProduct.php?id=" + id)
             .then(res => res.json())
             .then(data => {

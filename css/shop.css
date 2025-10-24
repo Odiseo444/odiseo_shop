@@ -385,21 +385,21 @@ body {
     padding: 2rem;
     background: white;
     border-radius: 20px;
-    box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
     border: 1px solid #e9ecef;
     display: grid;
     grid-template-columns: 2fr 1fr;
     gap: 2rem;
     animation: fadeInUp 0.6s ease forwards;
-  }
+}
 
-  .carrito-items {
+.carrito-items {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-  }
+}
 
-  .carrito-item {
+.carrito-item {
     display: flex;
     gap: 1.5rem;
     background: linear-gradient(135deg, #f8f9fa 0%, #fff 100%);
@@ -409,63 +409,63 @@ body {
     align-items: center;
     transition: all 0.3s ease;
     position: relative;
-  }
+}
 
-  .carrito-item:hover {
+.carrito-item:hover {
     border-color: #000;
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
-  }
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+}
 
-  .carrito-item img {
+.carrito-item img {
     width: 100px;
     height: 100px;
     object-fit: cover;
     border-radius: 12px;
     border: 2px solid #e9ecef;
-  }
+}
 
-  .carrito-detalles {
+.carrito-detalles {
     flex: 1;
-  }
+}
 
-  .carrito-detalles h3 {
+.carrito-detalles h3 {
     font-size: 1.2rem;
     font-weight: 700;
     margin-bottom: 0.5rem;
     color: #000;
-  }
+}
 
-  .carrito-detalles p {
+.carrito-detalles p {
     font-size: 0.95rem;
     color: #666;
-  }
+}
 
-  .carrito-controles {
+.carrito-controles {
     display: flex;
     align-items: center;
     gap: 1rem;
     justify-content: flex-end;
-  }
+}
 
-  .cantidad {
+.cantidad {
     display: flex;
     align-items: center;
     background: #f1f3f5;
     border-radius: 8px;
     overflow: hidden;
-  }
+}
 
-  .cantidad button {
+.cantidad button {
     background: none;
     border: none;
     padding: 8px 12px;
     font-size: 1.2rem;
     cursor: pointer;
     color: #000;
-  }
+}
 
-  .cantidad input {
+.cantidad input {
     width: 40px;
     text-align: center;
     border: none;
@@ -473,17 +473,17 @@ body {
     font-size: 1rem;
     font-weight: 600;
     color: #000;
-  }
+}
 
-  .precio {
+.precio {
     font-weight: 700;
     color: #28a745;
     font-size: 1.2rem;
     min-width: 80px;
     text-align: right;
-  }
+}
 
-  .btn-eliminar {
+.btn-eliminar {
     background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
     color: white;
     border: none;
@@ -491,15 +491,15 @@ body {
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-  }
+}
 
-  .btn-eliminar:hover {
+.btn-eliminar:hover {
     transform: translateY(-2px);
-    box-shadow: 0 5px 15px rgba(220,53,69,0.3);
-  }
+    box-shadow: 0 5px 15px rgba(220, 53, 69, 0.3);
+}
 
-  /* Resumen */
-  .resumen {
+/* Resumen */
+.resumen {
     background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
     border: 2px solid #e9ecef;
     border-radius: 15px;
@@ -507,48 +507,157 @@ body {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     justify-content: space-between;
-  }
+}
 
-  .up {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 150px;
+.up {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    backdrop-filter: blur(5px);
+}
+
+.modal.active {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    animation: fadeIn 0.3s ease;
+}
+
+.modal-content {
+    background: white;
+    padding: 2rem;
+    border-radius: 15px;
+    max-width: 500px;
+    width: 90%;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+    transform: scale(0.9);
+    animation: modalSlide 0.3s ease forwards;
+}
+
+.modal-header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.modal-header h3 {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #000;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 1rem;
+    justify-content: flex-end;
+    margin-top: 2rem;
+}
+
+.btn {
+    padding: 12px 24px;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.btn-primary {
+    background: linear-gradient(135deg, #000 0%, #333 100%);
+    color: white;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(0,0,0,0.2);
+}
+
+.btn-success {
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+    color: white;
+}
+
+.btn-success:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(40,167,69,0.3);
+}
+
+.btn-warning {
+    background: linear-gradient(135deg, #ffc107 0%, #ffb700 100%);
+    color: #212529;
+}
+
+.btn-warning:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(255,193,7,0.3);
+}
+
+.btn-danger {
+    background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+    color: white;
+}
+
+.btn-danger:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(220,53,69,0.3);
+}
+
+.btn-sm {
+    padding: 8px 16px;
+    font-size: 0.875rem;
+    margin: 0 5px;
 }
 
 .down {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 150px;
 }
 
-  .resumen h2 {
+.resumen h2 {
     font-size: 1.6rem;
     font-weight: 700;
     color: #000;
     text-align: center;
     margin-bottom: 1rem;
-  }
+}
 
-  .resumen-item {
+.resumen-item {
     display: flex;
     justify-content: space-between;
     font-size: 1rem;
     color: #333;
-  }
+}
 
-  .resumen-total {
+.resumen-total {
     font-weight: 800;
     color: #000;
     font-size: 1.3rem;
     border-top: 2px solid #e9ecef;
     padding-top: 1rem;
-  }
+}
 
-  .btn-pagar {
+.btn-pagar {
     background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
     border: none;
@@ -561,18 +670,18 @@ body {
     width: 100%;
     text-transform: uppercase;
     letter-spacing: 0.5px;
-  }
+}
 
-  .btn-pagar:hover {
+.btn-pagar:hover {
     transform: translateY(-3px);
-    box-shadow: 0 10px 25px rgba(40,167,69,0.3);
-  }
+    box-shadow: 0 10px 25px rgba(40, 167, 69, 0.3);
+}
 
-  @media (max-width: 900px) {
+@media (max-width: 900px) {
     .carrito-container {
-      grid-template-columns: 1fr;
+        grid-template-columns: 1fr;
     }
-  }
+}
 
 @media (max-width: 768px) {
     .nav-links {

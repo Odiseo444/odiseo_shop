@@ -111,7 +111,7 @@ $producto = mysqli_fetch_array($hacerConsulta);
 
                 <!-- Botón de añadir al carrito -->
                     <input type="hidden" name="id_producto" value="<?php echo $producto['id_producto']; ?>">
-                    <input type="number" name="cantidad" value="1" min="1" max="<?php echo $producto['stock']; ?>">
+                    <input type="number" id="cantidad" value="1" min="1" max="<?php echo $producto['stock']; ?>">
                     <button type="submit" name="add_cart" class="add-cart-btn" onclick="addToCart()" >Agregar al carrito</button>
             </div>
         </div>
@@ -124,28 +124,40 @@ $producto = mysqli_fetch_array($hacerConsulta);
         function addToCart() {
             const card = document.querySelector('.product-info h1').getAttribute('data-id');
             const title = document.querySelector('.product-info h1').textContent;
-            Swal.fire({
-                icon: 'success',
-                title: '¡Agregado!',
-                text: title + ' fue agregado al carrito',
-                showConfirmButton: false,
-                timer: 2500,
-                toast: true,
-                position: 'top-end'
-            });
+            
 
-            fetch('add_to_cart.php', {
+            fetch('Cart/add_to_cart.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ productId: card, cantidad: 1 })
+                body: JSON.stringify({ productId: card, cantidad: document.getElementById('cantidad').value })
             })
                 .then(response => response.json())
                 .then(data => {
-                    console.log(data);})
+                    console.log(data);
+                    Swal.fire({
+                icon: 'success',
+                title: '¡Agregado!',
+                text: title + ' fue agregado al carrito',
+                showConfirmButton: false,
+                timer: 2800,
+                toast: true,
+                position: 'top-end'
+            })
+                    
+                })
                 .catch(error => {
                     console.error('Error:', error);
+                    Swal.fire({
+                icon: 'error',
+                title: '¡error, intenta de nuevo!',
+                text: title + ' no fue agregado al carrito',
+                showConfirmButton: false,
+                timer: 2800,
+                toast: true,
+                position: 'top-end'
+            })
                 })
         };
 

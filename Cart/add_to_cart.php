@@ -9,7 +9,7 @@ if (!isset($_SESSION['id'])) {
     $userId = $_SESSION['id'];
 }
 
-require_once 'inc/database.php';
+require_once '../inc/database.php';
 $info = file_get_contents('php://input');
 $id = json_decode($info, true)['productId'];
 $cantidad = json_decode($info, true)['cantidad'];

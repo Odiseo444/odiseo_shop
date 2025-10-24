@@ -1,7 +1,7 @@
 <?php
 session_start();
 $id = $_SESSION['id'] ?? 'error';
-include_once 'inc\database.php';
+include_once '../inc\database.php';
 if (!($id == '')) {
   $consult = "SELECT * FROM usuarios WHERE id_usuario='$id'";
   $doConsult = mysqli_query($conexion, $consult);
@@ -17,9 +17,9 @@ $hacerConsulta = mysqli_query($conexion, $sql);
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tu Carrito</title>
-  <link rel="stylesheet" href="css/style.css">
+  
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-  <link rel="stylesheet" href="css/shop.css">
+  <link rel="stylesheet" href="../css/shop.css">
 </head>
 
 <body>
@@ -28,13 +28,13 @@ $hacerConsulta = mysqli_query($conexion, $sql);
   <header class="navbar">
 
     <div class="header-left">
-      <a href="Account/account.php"><span class="material-symbols-outlined">account_circle</span></a>
+      <a href="../Account/account.php"><span class="material-symbols-outlined">account_circle</span></a>
       <div class="logo">ODISEO SHOP</div>
     </div>
     <nav class="nav-links">
-      <a href="#">Inicio</a>
-      <a href="shop.php">Tienda</a>
-      <a href="nosotros.php">Nosotros</a>
+      <a href="../index.php">Inicio</a>
+      <a href="../shop.php">Tienda</a>
+      <a href="../nosotros.php">Nosotros</a>
       <a href="#">Contacto</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
         echo '<a href="Panel/panel.php">Panel de productos</a>';
@@ -63,16 +63,16 @@ $hacerConsulta = mysqli_query($conexion, $sql);
             </div>
             <div class="carrito-controles">
               <div class="cantidad">
-                <button>-</button>
-                <input type="text" value="<?php echo $item['cantidad'] ?>" readonly>
-                <button>+</button>
+                <button onclick="editCart(<?php echo $item['id_producto'] ?>, 'resta')">-</button>
+                <input type="text" data-id='<?php echo $item['id_producto'] ?>' value="<?php echo $item['cantidad'] ?>" readonly>
+                <button onclick="editCart(<?php echo $item['id_producto'] ?>, 'suma ')">+</button>
               </div>
               <div class="precio"><?php echo '$' . number_format($item['precio'], 0, ',', '.')  ?></div>
-              <button class="btn-eliminar">Eliminar</button>
+              <button class="btn-eliminar" onclick="showModal(<?php echo $item['id_producto'] ?>)">Eliminar</button>
             </div>
           </div>
           <script>
-            console.log("<?php echo $item['nombre'] ?>")
+            console.log("<?php echo $item['id_producto'] ?>")
           </script>
       <?php
           $precio += $item['precio'] * $item['cantidad'];
@@ -84,7 +84,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     <!-- Resumen -->
     <div class="resumen">
       <div class="up">
-      <h2>Resumen del Pedido</h2>
+        <h2>Resumen del Pedido</h2>
         <div class="resumen-item">
           <span>Subtotal</span>
           <span><?php echo '$' . number_format($precio, 0, ',', '.'); ?></span>
@@ -106,6 +106,59 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     </div>
   </main>
 
+  <div class="modal " id="deleteModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirmar Eliminación</h3>
+      </div>
+      <p>¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.</p>
+      <div class="modal-actions">
+        <input type="hidden" name="productId" value="">
+        <button type="submit" class="btn btn-danger" name="deleteProduct" id="delete">Eliminar</button>
+        <button class="btn btn-primary" onclick="showModal()">Cancelar</button>
+      </div>
+    </div>
+  </div>
 </body>
+
+<script>
+  const deleteModal = document.getElementById('deleteModal');
+  const eliminatedProduct = document.getElementById('delete');
+
+  function showModal(id) {
+    deleteModal.classList.toggle('active');
+    if (id) {
+      eliminatedProduct.setAttribute('onclick', ' deleteProduct(' + id + ')');
+    }
+  }
+
+  function deleteProduct(id) {
+
+    fetch("eliminatedProductCart.php?id=" + id)
+      .then(res => res.json())
+      .then(data => {
+        window.location = 'cart.php'
+      })
+      .catch(err => console.error(err));
+  }
+
+  function editCart(id, acc) {
+    const input = document.querySelector(`input[data-id="${id}"]`);
+    if (acc === 'resta') {
+      if (input.value > 1) {
+        input.value = parseInt(input.value) - 1;
+        console.log(input.value);
+      }
+    } else {
+      input.value = parseInt(input.value) + 1;
+    }
+    fetch("editCart.php?id=" + id + "&&cant=" + input.value)
+      .then(res => res.json())
+      .then(data => {
+        console.log(data);
+      })
+      .catch(err => console.error(err));
+  }
+</script>
 
 </html>

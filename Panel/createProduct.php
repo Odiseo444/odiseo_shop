@@ -167,6 +167,7 @@ confirmButtonText: 'Aceptar'
                 })
                 .catch(err => console.error(err));
         });
+
     </script>
 
 </body>

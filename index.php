@@ -15,7 +15,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Odiseo Shop | Moda Masculina</title>
-  <link href="/img/IMG-20250801-WA0005.jpg" rel="icon">
+  <link href="/img/IMG-20250801-WA0005.jpg" rel='icon'>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link href="https://fonts.googleapis.com/css2?family=Anton&display=swap" rel="stylesheet">
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -102,7 +102,6 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
     <section class="productos-section">
       <h3>Productos Destacados</h3>
       <div class="producto-container">
-        <!-- Ejemplo de productos (reemplaza con tu código PHP) -->
         <?php 
         $count = 0;
         while ($products = mysqli_fetch_array($hacerConsulta)) { ?>
@@ -157,7 +156,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <script>
     document.getElementById('cart').addEventListener('click', function() {
-      window.location.href = 'cart.php';
+      window.location.href = 'Cart/cart.php';
     });
   </script>
 </body>
