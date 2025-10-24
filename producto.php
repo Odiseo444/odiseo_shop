@@ -15,7 +15,7 @@ $idProducto = $_GET["idPro"] ?? '';
 
 if (empty($idProducto)) {
     die("No se ha especificado un producto.");
-}
+} 
 
 // Consulta corregida
 $sql = "SELECT 
@@ -175,3 +175,12 @@ $producto = mysqli_fetch_array($hacerConsulta);
     </script>
 </body>
 </html>
+
+
+
+
+
+
+
+
+   
