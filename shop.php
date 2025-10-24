@@ -60,7 +60,7 @@ $consultSql = mysqli_query($conexion, $sqlConsult);
     <div class="main-container">
         <div class="shop-hero">
             <h1>Catálogo Completo</h1>
-            <p>Descubre toda nuestra colección de moda masculina premium</p>
+            <p>Descubre toda nuestra colección de moda premium</p>
         </div>
 
         <div class="filters-container">

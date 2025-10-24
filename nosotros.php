@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+wws<!DOCTYPE html>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -588,7 +588,7 @@
     <section class="hero-section">
         <div class="hero-content">
             <h1 class="hero-title">NUESTRA HISTORIA</h1>
-            <p class="hero-subtitle">Un viaje de pasión, estilo y compromiso con la moda masculina</p>
+            <p class="hero-subtitle">Un viaje de pasión, estilo y compromiso con la moda</p>
         </div>
         <div class="scroll-indicator">
             <span style="font-size: 2rem; color: white;">↓</span>
@@ -600,10 +600,10 @@
         <section class="story-section fade-in">
             <h2 class="section-title">¿Quiénes Somos?</h2>
             <p class="story-text">
-                <strong>Odiseo Shop</strong> nació en 2020 con una visión clara: revolucionar la forma en que los hombres experimentan la moda. Inspirados en el estilo overzice, entendemos que cada hombre está en su propio viaje de autodescubrimiento y expresión personal.
+                <strong>Odiseo Shop</strong> nació en 2020 con una visión clara: revolucionar la forma en que las personas experimentan la moda. Inspirados en el estilo overzice, entendemos que cada persona está en su propio viaje de autodescubrimiento y expresión personal.
             </p>
             <p class="story-text">
-                Comenzamos como una pequeña tienda en línea con apenas 50 productos. Hoy, somos una referencia en moda masculina premium, atendiendo a miles de clientes en todo el país. Nuestra misión es simple pero poderosa: <strong>ofrecer estilo, calidad y confianza en cada prenda.</strong>
+                Comenzamos como una pequeña tienda en línea con apenas 20 productos. Hoy, somos una referencia en moda masculina premium, atendiendo a miles de clientes en todo el país. Nuestra misión es simple pero poderosa: <strong>ofrecer estilo, calidad y confianza en cada prenda.</strong>
             </p>
             <p class="story-text">
                  Cada pieza en nuestro catálogo es cuidadosamente seleccionada por nuestro equipo de expertos en moda. Trabajamos directamente con diseñadores y fabricantes que comparten nuestros valores de sostenibilidad, calidad artesanal y diseño innovador.
@@ -643,7 +643,7 @@
                     <div class="timeline-content">
                         <h3 class="timeline-title">El Comienzo</h3>
                         <p class="timeline-description">
-                            Fundamos Odiseo Shop con una inversión inicial modesta pero con grandes sueños. Nuestro primer mes vendimos 12 productos, pero cada cliente se convirtió en un embajador de nuestra marca.
+                            Fundamos Odiseo Shop con una inversión inicial modesta pero con grandes sueños. Nuestro primer mes vendimos 12 productos, pero cada cliente se convirtió en una pequeña parte de nuestra marca.
                         </p>
                     </div>
                 </div>
@@ -653,7 +653,7 @@
                     <div class="timeline-content">
                         <h3 class="timeline-title">Expansión Nacional</h3>
                         <p class="timeline-description">
-                            Alcanzamos los 1,000 clientes y expandimos nuestro catálogo a más de 200 productos. Establecimos alianzas con marcas reconocidas y comenzamos a ofrecer envíos a todo el país.
+                            Alcanzamos los 1,000 clientes y expandimos nuestro catálogo a más de 160 productos. Establecimos alianzas con marcas reconocidas y comenzamos a ofrecer envíos a todo el país.
                         </p>
                     </div>
                 </div>
