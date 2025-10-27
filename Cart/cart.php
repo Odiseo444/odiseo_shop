@@ -20,6 +20,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
   
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="../css/shop.css">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body>
@@ -41,7 +42,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       } ?>
     </nav>
   </header>
-  <a href="index.php" class="btn-volver">
+  <a href="../index.php" class="btn-volver">
     <span class="material-symbols-outlined">arrow_back</span> Volver
   </a>
   <!-- Carrito -->
@@ -50,9 +51,23 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     <div class="carrito-items">
       <?php
       $precio = 0;
-      if (mysqli_num_rows($hacerConsulta) == 0) {
+        if ($id == 'error') {
+          echo "<script>
+          window.addEventListener('DOMContentLoaded', () => {
+            Swal.fire({
+              title: 'Debes iniciar sesión para ver tu carrito',
+              icon: 'warning',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Aceptar'
+            }).then(() => {
+              window.location.href = '../User/user.php';
+            });
+          });
+          </script>";
+        } elseif (mysqli_num_rows($hacerConsulta) == 0) {
+        {
         echo "<p>Tu carrito está vacío.</p>";
-        echo "<script>console.log('$id')</script>";
+        }
       } else {
         while ($item = mysqli_fetch_array($hacerConsulta)) { ?>
           <div class="carrito-item">
@@ -64,7 +79,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
             <div class="carrito-controles">
               <div class="cantidad">
                 <button onclick="editCart(<?php echo $item['id_producto'] ?>, 'resta')">-</button>
-                <input type="text" data-id='<?php echo $item['id_producto'] ?>' value="<?php echo $item['cantidad'] ?>" readonly>
+                <input type="num" oninput="editCart(<?php echo $item['id_producto'] ?>, '')" data-id='<?php echo $item['id_producto'] ?>' value="<?php echo $item['cantidad'] ?>">
                 <button onclick="editCart(<?php echo $item['id_producto'] ?>, 'suma ')">+</button>
               </div>
               <div class="precio"><?php echo '$' . number_format($item['precio'], 0, ',', '.')  ?></div>
@@ -129,6 +144,8 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     deleteModal.classList.toggle('active');
     if (id) {
       eliminatedProduct.setAttribute('onclick', ' deleteProduct(' + id + ')');
+    } else {
+      window.location = 'cart.php';
     }
   }
 
@@ -145,17 +162,19 @@ $hacerConsulta = mysqli_query($conexion, $sql);
   function editCart(id, acc) {
     const input = document.querySelector(`input[data-id="${id}"]`);
     if (acc === 'resta') {
-      if (input.value > 1) {
         input.value = parseInt(input.value) - 1;
         console.log(input.value);
-      }
-    } else {
+        if (input.value == 0) {
+          showModal(id);
+        }
+    } else if (acc === 'suma ') {
       input.value = parseInt(input.value) + 1;
     }
     fetch("editCart.php?id=" + id + "&&cant=" + input.value)
       .then(res => res.json())
       .then(data => {
-        console.log(data);
+       console.log(data);
+       
       })
       .catch(err => console.error(err));
   }

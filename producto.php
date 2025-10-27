@@ -145,11 +145,23 @@ $producto = mysqli_fetch_array($hacerConsulta);
                 toast: true,
                 position: 'top-end'
             })
+            if (data.error == 'Usuario no autenticado') {
+                Swal.fire({
+                icon: 'error',
+                title: '¡Error, registrate o inicia sesión!',
+                text: title + ' no fue agregado al carrito',
+                showConfirmButton: false,
+                timer: 2800,
+                toast: true,
+                position: 'top-end'
+            })
+            }
                     
                 })
                 .catch(error => {
                     console.error('Error:', error);
-                    Swal.fire({
+                    
+                Swal.fire({
                 icon: 'error',
                 title: '¡error, intenta de nuevo!',
                 text: title + ' no fue agregado al carrito',
