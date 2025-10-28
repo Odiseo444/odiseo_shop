@@ -102,11 +102,11 @@ $hacerConsulta = mysqli_query($conexion, $sql);
         <h2>Resumen del Pedido</h2>
         <div class="resumen-item">
           <span>Subtotal</span>
-          <span><?php echo '$' . number_format($precio, 0, ',', '.'); ?></span>
+          <span id="subt"><?php echo '$' . number_format($precio, 0, ',', '.'); ?></span>
         </div>
         <div class="resumen-item">
           <span>IVA</span>
-          <span>$<?php
+          <span id="iva">$<?php
                   $iva = $precio * 0.19;
                   echo number_format($iva, 0, ',', '.') ?></span>
         </div>
@@ -114,7 +114,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       <div class="down">
         <div class="resumen-item resumen-total">
           <span>Total</span>
-          <span>$<?php echo number_format($precio + $iva, 0, ',', '.') ?></span>
+          <span id="total">$<?php echo number_format($precio + $iva, 0, ',', '.') ?></span>
         </div>
         <button class="btn-pagar">Finalizar Compra</button>
       </div>
@@ -160,6 +160,13 @@ $hacerConsulta = mysqli_query($conexion, $sql);
   }
 
   function editCart(id, acc) {
+    const formatterSinDecimales = new Intl.NumberFormat('es-ES', {
+  style: 'currency',
+  currency: 'COP',
+  minimumFractionDigits: 0,
+  maximumFractionDigits: 0,
+});
+console.log(formatterSinDecimales.format(1500));
     const input = document.querySelector(`input[data-id="${id}"]`);
     if (acc === 'resta') {
         input.value = parseInt(input.value) - 1;
@@ -174,7 +181,13 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       .then(res => res.json())
       .then(data => {
        console.log(data);
-       
+       if (data.message == 'cantidad reducida') {
+         document.getElementById('subt').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) - data.price).replace('COP', '').trim();
+         console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) - data.price);
+       } else if (data.message == 'cantidad aumentada') {
+         document.getElementById('subt').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price).replace('COP', '').trim();
+         console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price);
+       }
       })
       .catch(err => console.error(err));
   }
