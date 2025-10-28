@@ -184,9 +184,13 @@ console.log(formatterSinDecimales.format(1500));
        if (data.message == 'cantidad reducida') {
          document.getElementById('subt').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) - data.price).replace('COP', '').trim();
          console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) - data.price);
-       } else if (data.message == 'cantidad aumentada') {
-         document.getElementById('subt').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price).replace('COP', '').trim();
-         console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price);
+         document.getElementById('iva').textContent = '$' + formatterSinDecimales.format((parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
+         document.getElementById('total').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + (parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
+        } else if (data.message == 'cantidad aumentada') {
+          document.getElementById('subt').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price).replace('COP', '').trim();
+          console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price);
+          document.getElementById('iva').textContent = '$' + formatterSinDecimales.format((parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
+          document.getElementById('total').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + (parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
        }
       })
       .catch(err => console.error(err));
