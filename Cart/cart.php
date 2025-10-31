@@ -7,8 +7,9 @@ if (!($id == '')) {
   $doConsult = mysqli_query($conexion, $consult);
   $user = mysqli_fetch_array($doConsult);
 }
-$sql = 'SELECT cr.id_producto, p.nombre, p.id_categoria, ca.nombre AS categoria, p.precio, cr.cantidad, p.imagen FROM carrito cr JOIN productos p ON cr.id_producto = p.id_producto JOIN categorias ca ON p.id_categoria = ca.id_categoria WHERE cr.id_usuario = ' . intval($id);
+$sql = 'SELECT cr.id_producto, p.nombre, cr.cantidad, p.id_categoria, ca.nombre AS categoria, p.precio, cr.cantidad, p.imagen FROM carrito cr JOIN productos p ON cr.id_producto = p.id_producto JOIN categorias ca ON p.id_categoria = ca.id_categoria WHERE cr.id_usuario = ' . intval($id);
 $hacerConsulta = mysqli_query($conexion, $sql);
+$hacerConsulta2 = mysqli_query($conexion, $sql);
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -18,6 +19,8 @@ $hacerConsulta = mysqli_query($conexion, $sql);
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Tu Carrito</title>
   
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
   <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
   <link rel="stylesheet" href="../css/shop.css">
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -37,6 +40,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
       <a href="../shop.php">Tienda</a>
       <a href="../nosotros.php">Nosotros</a>
       <a href="#">Contacto</a>
+<a href="Cart/cart.php">Carrito</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
         echo '<a href="Panel/panel.php">Panel de productos</a>';
       } ?>
@@ -116,7 +120,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
           <span>Total</span>
           <span id="total">$<?php echo number_format($precio + $iva, 0, ',', '.') ?></span>
         </div>
-        <button class="btn-pagar">Finalizar Compra</button>
+        <button class="btn-pagar" onclick="showModal('', 'buy')">Finalizar Compra</button>
       </div>
     </div>
   </main>
@@ -135,13 +139,71 @@ $hacerConsulta = mysqli_query($conexion, $sql);
     </div>
   </div>
 </body>
+  <div class="modal" id="buyModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h3>Confirmar Compra</h3>
+      </div>
+      <p>¿Estás seguro de que deseas Comprar estos productos? se realizara un reembolso si los productos no legan en 20 dias habiles.</p>
+      <ul class="list-group">
+        <?php while ($item = mysqli_fetch_array($hacerConsulta2)) { ?>
+  <li class="list-group-item d-flex justify-content-between align-items-center" data-id="<?php echo $item['id_producto'] ?>">
+    <?php echo $item['nombre']; ?>
+    <span class="badge text-bg-primary rounded-pill"><?php echo $item['cantidad']; ?> </span>
+  </li>
+<?php } ?>  
+</ul>
+<br>
+<div class="d-flex justify-content-between align-items-center mb-3">
+                <div data-mdb-input-init class="form-outline">
+                  <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                    placeholder="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                  <label class="form-label" for="typeText">Card Number</label>
+                </div>
+                <img src="https://img.icons8.com/color/48/000000/visa.png" alt="visa" width="64px" />
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div data-mdb-input-init class="form-outline">
+                  <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                    placeholder="Cardholder's Name" />
+                  <label class="form-label" for="typeName">Cardholder's Name</label>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-between align-items-center pb-2">
+                <div data-mdb-input-init class="form-outline">
+                  <input type="text" id="typeExp" class="form-control form-control-lg" placeholder="MM/YYYY"
+                    size="7" id="exp" minlength="7" maxlength="7" />
+                  <label class="form-label" for="typeExp">Expiration</label>
+                </div>
+                <div data-mdb-input-init class="form-outline">
+                  <input type="password" id="typeText2" class="form-control form-control-lg"
+                    placeholder="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                  <label class="form-label" for="typeText2">Cvv</label>
+                </div>
+              </div>
+      <div class="modal-actions">
+        <button class="btn btn-danger" onclick="showModal()">Cancelar</button>  
+        <button type="submit" class="btn btn-success" name="deleteProduct" id="delete">Comprar</button>
+      </div>
+    </div>
+  </div>
+</body>
 
 <script>
   const deleteModal = document.getElementById('deleteModal');
+  const buyModal = document.getElementById('buyModal');
   const eliminatedProduct = document.getElementById('delete');
+  const buyProduct = document.getElementById('buy');
 
-  function showModal(id) {
-    deleteModal.classList.toggle('active');
+  function showModal(id, acc) {
+    if (acc === 'buy') {
+      buyModal.classList.toggle('active');
+      return;
+    } else {
+      deleteModal.classList.toggle('active');
+    }
     if (id) {
       eliminatedProduct.setAttribute('onclick', ' deleteProduct(' + id + ')');
     } else {
@@ -168,6 +230,7 @@ $hacerConsulta = mysqli_query($conexion, $sql);
 });
 console.log(formatterSinDecimales.format(1500));
     const input = document.querySelector(`input[data-id="${id}"]`);
+    const p = document.querySelector('.list-group-item[data-id="' + id + '"] span');
     if (acc === 'resta') {
         input.value = parseInt(input.value) - 1;
         console.log(input.value);
@@ -176,6 +239,9 @@ console.log(formatterSinDecimales.format(1500));
         }
     } else if (acc === 'suma ') {
       input.value = parseInt(input.value) + 1;
+      if (input.value > 99) {
+        input.value = 99;
+      }
     }
     fetch("editCart.php?id=" + id + "&&cant=" + input.value)
       .then(res => res.json())
@@ -186,11 +252,14 @@ console.log(formatterSinDecimales.format(1500));
          console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) - data.price);
          document.getElementById('iva').textContent = '$' + formatterSinDecimales.format((parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
          document.getElementById('total').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + (parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
+         p.textContent = input.value;
+         console.log('cantidad: ' + p.textContent);
         } else if (data.message == 'cantidad aumentada') {
           document.getElementById('subt').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price).replace('COP', '').trim();
           console.log(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + data.price);
           document.getElementById('iva').textContent = '$' + formatterSinDecimales.format((parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
           document.getElementById('total').textContent = '$' + formatterSinDecimales.format(parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')) + (parseInt(document.getElementById('subt').textContent.replace('$', '').replace(/\./g, '')))*0.19).replace('COP', '').trim();
+          p.textContent = input.value;
        }
       })
       .catch(err => console.error(err));

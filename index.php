@@ -35,6 +35,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
       <a href="shop.php">Tienda</a>
       <a href="nosotros.php">Nosotros</a>
       <a href="#">Contacto</a>
+      <a href="Cart/cart.php">Carrito</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
           echo '<a href="Panel/panel.php">Panel de productos</a>';
         } ?>
@@ -149,16 +150,6 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
       <a href="#"><i class="bi bi-instagram"></i></a>
     </div>
   </footer>
-
-  <div id="cart" class="cart">
-  <span class="material-symbols-outlined">shopping_cart</span>
-  </div>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
-  <script>
-    document.getElementById('cart').addEventListener('click', function() {
-      window.location.href = 'Cart/cart.php';
-    });
-  </script>
 </body>
 
 </html>

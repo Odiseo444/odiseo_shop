@@ -67,6 +67,7 @@ $producto = mysqli_fetch_array($hacerConsulta);
             <a href="shop.php">Tienda</a>
             <a href="about.php">Nosotros</a>
             <a href="#">Contacto</a>
+<a href="Cart/cart.php">Carrito</a>
         </nav>
     </header>
 

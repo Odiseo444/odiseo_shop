@@ -51,6 +51,7 @@ $consultSql = mysqli_query($conexion, $sqlConsult);
       <a href="#">Tienda</a>
       <a href="nosotros.php">Nosotros</a>
       <a href="#">Contacto</a>
+<a href="Cart/cart.php">Carrito</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
           echo '<a href="Panel/panel.php">Panel de productos</a>';
         } ?>
