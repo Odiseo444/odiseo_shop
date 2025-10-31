@@ -185,7 +185,7 @@ $hacerConsulta2 = mysqli_query($conexion, $sql);
               </div>
       <div class="modal-actions">
         <button class="btn btn-danger" onclick="showModal()">Cancelar</button>  
-        <button type="submit" class="btn btn-success" name="deleteProduct" id="delete">Comprar</button>
+        <button type="submit" class="btn btn-success" name="buyProduct" id="buy">Comprar</button>
       </div>
     </div>
   </div>
@@ -219,6 +219,14 @@ $hacerConsulta2 = mysqli_query($conexion, $sql);
         window.location = 'cart.php'
       })
       .catch(err => console.error(err));
+  }
+  function buyProducts() {
+    fetch("buyProducts.php")
+    .then(res => res.json())
+    .then(data => {
+      window.location = 'cart.php?msg=Pedido hecho con exito'
+    })
+    .catch(err => console.error(err));
   }
 
   function editCart(id, acc) {

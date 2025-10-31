@@ -24,7 +24,15 @@ CREATE DATABASE IF NOT EXISTS `odiseoshop` DEFAULT CHARACTER SET utf8mb4 COLLATE
 USE `odiseoshop`;
 
 -- --------------------------------------------------------
-
+CREATE TABLE pedidos (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    id_usuario INT NOT NULL,
+    pedido JSON NOT NULL,
+    precio_total DECIMAL(10,2) NOT NULL,
+    fecha DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_entrega DATETIME,
+    FOREIGN KEY (id_usuario) REFERENCES usuarios(id_usuario)
+);
 --
 -- Estructura de tabla para la tabla `carrito`
 --
