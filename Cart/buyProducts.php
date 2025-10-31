@@ -10,34 +10,44 @@ if (!isset($_SESSION['id'])) {
 }
 
 require_once '../inc/database.php';
-// $id = json_decode($info, true)['productId'];
-$sql = "SELECT * FROM carrito WHERE id_usuario = $userId";
-$sql2 = "";
-$res = $conexion->query($sql);
+$sql = "DELETE FROM carrito WHERE id_usuario = $userId";
+$sql2 = "SELECT p.id_producto,  FROM productos WHERE id_producto IN (SELECT id_producto FROM carrito WHERE id_usuario = $userId)";
+$res = $conexion->query($sql2);
+$conexion->query($sql);
+
 if ($res->num_rows == 0) {
     http_response_code(404);
     echo json_encode(['error' => 'Producto no encontrado']);
     exit;
 }
- if ($cantidad < 1) {
-    http_response_code(400);
-    echo json_encode(['error' => 'Cantidad inválida']);
-    exit;
+
+$pedido = [
+    'id_usuario' => $userId,
+    'pedido' => [],
+    'precio_total' => '0',
+    'fecha' => date('Y-m-d H:i:s'),
+    'fecha_entrega' => date('Y-m-d H:i:s', strtotime('+7 days'))
+];
+
+while ($row = $res->fetch_assoc()) {
+    $pedido['pedido'] .= [
+        'id_producto' => $row['id_producto'],
+        'nombre' => $row['nombre'],
+        'precio' => $row['precio'],
+        'cantidad' => $row['cantidad']
+    ];
+    $pedido['precio_total'] += $row['precio'] * $row['cantidad'];
 }
-$consulta = "SELECT * FROM carrito WHERE id_usuario = $userId AND id_producto = $id";
-$resultado = $conexion->query($consulta);
-if ($resultado->num_rows > 0) {
-    $fila = $resultado->fetch_assoc();
-    $nuevaCantidad = $fila['cantidad'] + $cantidad;
-    $update = "UPDATE carrito SET cantidad = $nuevaCantidad WHERE id_usuario = $userId AND id_producto = $id";
-    $conexion->query($update);
-    header('Content-Type: application/json');
-    echo json_encode('Cantidad actualizada en el carrito');
-    exit;
+
+$insertPedido = "INSERT INTO pedidos (id_usuario, pedido, precio_total, fecha, fecha_entrega) VALUES ('$pedido[id_usuario]', '$pedido[pedido]', '$pedido[precio_total]', '$pedido[fecha]', '$pedido[fecha_entrega]')";
+$conexion->query($insertPedido);
+
+while ($row = $res->fetch_assoc()) {
+    $nuevaCantidad = $row['stock'] - $row['cantidad'];
+    $updateStock = "UPDATE productos SET stock = '$nuevaCantidad' WHERE id_producto = '$row[id_producto]'";
+    $conexion->query($updateStock);
 }
-$consult = "INSERT INTO carrito (id_usuario, id_producto, cantidad) VALUES ($userId, $id, $cantidad)";
-$conexion->query($consult);
 
 header('Content-Type: application/json');
-echo json_encode('Producto agregado al carrito');
+echo json_encode('Pedido realizado con éxito');
 ?>

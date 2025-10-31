@@ -42,7 +42,7 @@ $hacerConsulta2 = mysqli_query($conexion, $sql);
       <a href="#">Contacto</a>
 <a href="Cart/cart.php">Carrito</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
-        echo '<a href="Panel/panel.php">Panel de productos</a>';
+        echo '<a href="../Panel/panel.php">Panel de productos</a>';
       } ?>
     </nav>
   </header>
@@ -185,7 +185,7 @@ $hacerConsulta2 = mysqli_query($conexion, $sql);
               </div>
       <div class="modal-actions">
         <button class="btn btn-danger" onclick="showModal()">Cancelar</button>  
-        <button type="submit" class="btn btn-success" name="buyProduct" id="buy">Comprar</button>
+        <button type="submit" class="btn btn-success" name="buyProduct" id="buy" onclick="buyProducts()">Comprar</button>
       </div>
     </div>
   </div>
