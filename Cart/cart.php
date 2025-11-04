@@ -196,6 +196,13 @@ $hacerConsulta2 = mysqli_query($conexion, $sql);
   const buyModal = document.getElementById('buyModal');
   const eliminatedProduct = document.getElementById('delete');
   const buyProduct = document.getElementById('buy');
+  const carrito = document.querySelector('.carrito-items');
+
+  // datos de la tarjeta
+  const cardNumber = document.getElementById('typeText');
+  const cardName = document.getElementById('typeName');
+  const cardExp = document.getElementById('typeExp');
+  const cardCvv = document.getElementById('typeText2');
 
   function showModal(id, acc) {
     if (acc === 'buy') {
@@ -221,12 +228,21 @@ $hacerConsulta2 = mysqli_query($conexion, $sql);
       .catch(err => console.error(err));
   }
   function buyProducts() {
-    fetch("buyProducts.php")
-    .then(res => res.json())
-    .then(data => {
-      window.location = 'cart.php?msg=Pedido hecho con exito'
-    })
-    .catch(err => console.error(err));
+    if (cardNumber.value === '' || cardName.value === '' || cardExp.value === '' || cardCvv.value === '') {
+      alert('Por favor, complete todos los campos de la tarjeta.');
+      return;
+    } else if (carrito.innerHTML.trim() === '' || carrito.innerHTML.includes('Tu carrito está vacío.')) {
+      alert('Tu carrito está vacío.');
+      return;
+    } else {
+      fetch("buyProducts.php")
+      .then(res => res.json())
+      .then(data => {
+        window.location = 'cart.php?msg=Pedido hecho con exito';
+        console.log(data);
+      })
+      .catch(err => console.error(err));
+    }
   }
 
   function editCart(id, acc) {
