@@ -10,6 +10,22 @@ if (!($id == '')) {
 $sql = 'SELECT cr.id_producto, p.nombre, cr.cantidad, p.id_categoria, ca.nombre AS categoria, p.precio, cr.cantidad, p.imagen FROM carrito cr JOIN productos p ON cr.id_producto = p.id_producto JOIN categorias ca ON p.id_categoria = ca.id_categoria WHERE cr.id_usuario = ' . intval($id);
 $hacerConsulta = mysqli_query($conexion, $sql);
 $hacerConsulta2 = mysqli_query($conexion, $sql);
+
+if (isset($_GET['msg'])) {
+  $msg = ($_GET['msg']);
+  echo "<script>
+          window.addEventListener('DOMContentLoaded', () => {
+            Swal.fire({
+              title: '$msg',
+              icon: 'success',
+              confirmButtonColor: '#3085d6',
+              confirmButtonText: 'Aceptar'
+            }).then(() => {
+              window.location.href = '../shop.php';
+            });
+          });
+          </script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
