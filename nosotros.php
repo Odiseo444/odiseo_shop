@@ -577,7 +577,7 @@ wws<!DOCTYPE html>
             <a href="index.php">Inicio</a>
       <a href="shop.php">Tienda</a>
       <a href="#">Nosotros</a>
-      <a href="#">Contacto</a>
+      <a href="contacto.php">Contacto</a>
 <a href="Cart/cart.php">Carrito</a>
       <?php if (isset($user)) if ($user['rol'] === '0') {
           echo '<a href="Panel/panel.php">Panel de productos</a>';

@@ -153,6 +153,213 @@ if (isset($_GET['log'])) {
         </div>
     </div>
 
+    <style>
+        /* Modal overlay */
+        .modal-pedidos {
+            position: fixed;
+            inset: 0;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 9999;
+            padding: 20px;
+        }
+
+        .modal-pedidos.open {
+            display: flex;
+        }
+
+        /* Modal box */
+        .modal-content-pedidos {
+            width: 100%;
+            max-width: 900px;
+            max-height: 85vh;
+            background: #fff;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+            padding: 22px;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            border: 1px solid #e9ecef;
+        }
+
+        /* Close button */
+        .close-btn-pedidos {
+            position: absolute;
+            right: 26px;
+            top: 26px;
+            cursor: pointer;
+            font-size: 22px;
+            color: #666;
+            background: transparent;
+            border: none;
+            line-height: 1;
+            transition: color .15s ease;
+        }
+        .close-btn-pedidos:hover {
+            color: #000;
+        }
+
+        /* Header */
+        .modal-content-pedidos h2 {
+            margin: 0;
+            font-size: 20px;
+            font-weight: 700;
+            color: #111;
+        }
+
+        /* Scrollable list area */
+        .pedidos-lista {
+            overflow-y: auto;
+            padding-right: 6px;
+        }
+
+        /* Individual pedido */
+        .pedido-item {
+            border: 1px solid #f1f3f5;
+            background: linear-gradient(180deg, #ffffff 0%, #fbfdff 100%);
+            padding: 14px;
+            border-radius: 10px;
+            margin-bottom: 12px;
+            box-shadow: 0 3px 8px rgba(12, 16, 20, 0.04);
+        }
+        .pedido-item h3 {
+            margin: 0 0 6px 0;
+            font-size: 16px;
+            color: #0b5ed7;
+        }
+        .pedido-item p {
+            margin: 4px 0;
+            color: #444;
+            font-size: 14px;
+        }
+        .pedido-item ul {
+            margin: 8px 0 0 18px;
+            padding: 0;
+            color: #333;
+        }
+        .pedido-item li {
+            margin-bottom: 6px;
+            font-size: 14px;
+        }
+
+        /* Empty state */
+        .pedidos-lista p {
+            color: #6c757d;
+            font-size: 15px;
+            margin: 12px 0;
+        }
+
+        /* "Ver pedidos" floating button */
+        .btn-ver-pedidos {
+            position: fixed;
+            right: 20px;
+            bottom: 20px;
+            background: #0d6efd;
+            color: #fff;
+            border: none;
+            padding: 12px 16px;
+            border-radius: 999px;
+            cursor: pointer;
+            box-shadow: 0 6px 18px rgba(13,110,253,0.18);
+            font-weight: 600;
+            z-index: 9998;
+            transition: transform .12s ease, box-shadow .12s ease;
+        }
+        .btn-ver-pedidos:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 26px rgba(13,110,253,0.22);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 520px) {
+            .modal-content-pedidos {
+                padding: 16px;
+                max-width: 95%;
+            }
+            .close-btn-pedidos {
+                right: 12px;
+                top: 12px;
+            }
+        }
+    </style>
+
+    <button class="btn-ver-pedidos" aria-haspopup="dialog">Ver historial de pedidos</button>
+
+    <div class="modal-pedidos" role="dialog" aria-modal="true" aria-label="Historial de pedidos">
+        <div class="modal-content-pedidos">
+            <button class="close-btn-pedidos" aria-label="Cerrar">&times;</button>
+            <h2>Historial de Pedidos</h2>
+            <div class="pedidos-lista">
+                <?php
+                $sqlPedidos = "SELECT * FROM pedidos WHERE id_usuario = $id ORDER BY fecha DESC";
+                $resultPedidos = mysqli_query($conexion, $sqlPedidos);
+                if (mysqli_num_rows($resultPedidos) == 0) {
+                    echo "<p>No has realizado ningún pedido aún.</p>";
+                } else {
+                    $count = 0;
+                    while ($pedido = mysqli_fetch_array($resultPedidos)) {
+                        $count++;
+                        $pedidoItems = json_decode($pedido['pedido'], true);
+                        echo "<div class='pedido-item'>
+                                <h3>Pedido #" . $count . "</h3>
+                                <p><strong>Fecha:</strong> " . htmlspecialchars($pedido['fecha'], ENT_QUOTES, 'UTF-8') . "</p>
+                                <p><strong>Fecha de entrega:</strong> " . htmlspecialchars($pedido['fecha_entrega'], ENT_QUOTES, 'UTF-8') . "</p>
+                                <p><strong>Precio total:</strong> $" . number_format($pedido['precio_total'], 2) . "</p>
+                                <h4 style='margin:8px 0 6px 0;'>Productos:</h4>
+                                <ul>";
+                        if (!is_array($pedidoItems)) {
+                            $pedidoItems = [];
+                        }
+                        foreach ($pedidoItems as $item) {
+                            $cantidad = isset($item['cantidad']) ? (int)$item['cantidad'] : 0;
+                            $nombre = isset($item['nombre']) ? htmlspecialchars($item['nombre'], ENT_QUOTES, 'UTF-8') : 'Producto';
+                            $precioNum = isset($item['precio']) ? (float)$item['precio'] : 0;
+                            echo "<li>" . $cantidad . " x " . $nombre . " - $" . number_format($precioNum, 2) . "</li>";
+                        }
+                        echo "</ul>
+                              </div>";
+                    }
+                }
+                ?>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            const btnOpen = document.querySelector('.btn-ver-pedidos');
+            const modal = document.querySelector('.modal-pedidos');
+            const btnClose = document.querySelector('.close-btn-pedidos');
+            const modalContent = document.querySelector('.modal-content-pedidos');
+
+            function openModal() {
+                modal.classList.add('open');
+                document.body.style.overflow = 'hidden';
+            }
+            function closeModal() {
+                modal.classList.remove('open');
+                document.body.style.overflow = '';
+            }
+
+            if (btnOpen) btnOpen.addEventListener('click', openModal);
+            if (btnClose) btnClose.addEventListener('click', closeModal);
+
+            // Close when clicking outside content
+            modal.addEventListener('click', (e) => {
+                if (!modalContent.contains(e.target)) closeModal();
+            });
+
+            // Close with Esc
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape' && modal.classList.contains('open')) closeModal();
+            });
+        })();
+    </script>
+
     <script>
         function showLogoutAlert() {
             Swal.fire({
