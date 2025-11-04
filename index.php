@@ -107,7 +107,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
         $count = 0;
         while ($products = mysqli_fetch_array($hacerConsulta)) { ?>
         <div class="col-md-4">
-          <div class="product-card">
+          <div class="product-card" data-id='<?php echo $products['id_producto'] ?>'>
             <div class="product-content">
               <img src="data:image/jpeg;base64,<?php echo $products['imagen'] ?>" alt="<?php echo $products['nombre'] ?>" class="product-main-image">
               <div class="product-details">
@@ -118,7 +118,7 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
                 </div>
                 <div class="product-price">$<?php echo $products['precio'] ?></div>
                 <div class="product-actions">
-                  <button class="btn btn-success">Agregar al carrito</button>
+                  <button class="btn btn-success">Ver</button>
                 </div>
               </div>
             </div>
@@ -150,6 +150,16 @@ $hacerConsulta = mysqli_query($conexion, $sql); ?>
       <a href="#"><i class="bi bi-instagram"></i></a>
     </div>
   </footer>
+  <script>
+    const productCard = document.querySelectorAll('.product-card');
+      
+              productCard.forEach(card => {
+                  card.addEventListener('click', () => {
+                  const productId = card.getAttribute('data-id');
+                  window.location.href = 'producto.php?idPro=' + productId;
+                  });
+              });
+  </script>
 </body>
 
 </html>

@@ -55,7 +55,12 @@ if (isset($_GET['log'])) {
                 <!-- Stats rápidas -->
                 <div class="quick-stats">
                     <div class="stat-item">
-                        <span class="stat-number">0</span>
+                        <?php
+                        $sqlPedidos = "SELECT * FROM pedidos WHERE id_usuario = $id";
+                        $resultPedidos = mysqli_query($conexion, $sqlPedidos);
+                        $totalPedidos = mysqli_num_rows($resultPedidos);
+                        ?>
+                        <span class="stat-number"><?php echo $totalPedidos ?></span>
                         <span class="stat-label">Pedidos</span>
                     </div>
                     <div class="stat-item">

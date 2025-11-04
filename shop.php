@@ -175,13 +175,21 @@ $consultSql = mysqli_query($conexion, $sqlConsult);
         // Filtros
         document.getElementById('categoryFilter').addEventListener('change', filterProducts);
         document.getElementById('priceFilter').addEventListener('change', filterProducts);
-
+        
         function filterProducts() {
             const search = document.getElementById('searchInput').value.toLowerCase();
             const category = document.getElementById('categoryFilter').value;
             const priceRange = document.getElementById('priceFilter').value;
             const cards = document.querySelectorAll('.product-card');
             let count = 0;
+            const productCard = document.querySelectorAll('.product-card');
+      
+              productCard.forEach(card => {
+                  card.addEventListener('click', () => {
+                  const productId = card.getAttribute('data-id');
+                  window.location.href = 'producto.php?idPro=' + productId;
+                  });
+              });
 
             cards.forEach(card => {
                 let show = true;
@@ -239,14 +247,6 @@ $consultSql = mysqli_query($conexion, $sqlConsult);
             cards.forEach(card => grid.appendChild(card));
         });
 
-      const productCard = document.querySelectorAll('.product-card');
-
-        productCard.forEach(card => {
-            card.addEventListener('click', () => {
-            const productId = card.getAttribute('data-id');
-            window.location.href = 'producto.php?idPro=' + productId;
-            });
-        });
     </script>
 </body>
 </html>
